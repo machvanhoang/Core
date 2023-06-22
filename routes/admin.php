@@ -16,7 +16,7 @@ use App\Http\Controllers\Admin\Auth\AuthController;
 
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::middleware('admin.logged')->group(function () {
-        Route::controller(AuthController::class)->group(function(){
+        Route::controller(AuthController::class)->group(function () {
             Route::post('logout', 'logout')->name('logout');
         });
         Route::controller(AdminController::class)->group(function () {

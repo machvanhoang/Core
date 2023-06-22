@@ -5,6 +5,7 @@
             <i class="bx bx-menu bx-sm"></i>
         </a>
     </div>
+
     <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
         <div class="navbar-nav align-items-center">
             <div class="nav-item d-flex align-items-center">
@@ -32,7 +33,7 @@
                             <div class="d-flex">
                                 <div class="flex-shrink-0 me-3">
                                     <div class="avatar avatar-online">
-                                        <img src="../assets/img/avatars/1.png" alt
+                                        <img src="{{ asset('assets/admin/img/avatars/1.png') }}" alt
                                             class="w-px-40 h-auto rounded-circle" />
                                     </div>
                                 </div>
@@ -72,16 +73,17 @@
                         <div class="dropdown-divider"></div>
                     </li>
                     <li>
-                        <a class="dropdown-item" href="#" id="logoutLink">
+                        <a class="dropdown-item formLogoutLink" href="#">
                             <i class="bx bx-power-off me-2"></i>
                             <span class="align-middle">Log Out</span>
                         </a>
-                        <form action="{{ route('admin.logout') }}" method="POST" role="form" id="formLogout">
+                        <form action="{{ route('admin.logout') }}" id="formLogout" method="POST" role="form">
                             @csrf
                         </form>
                     </li>
                 </ul>
             </li>
+            <!--/ User -->
         </ul>
     </div>
 </nav>
