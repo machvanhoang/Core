@@ -1,0 +1,33 @@
+﻿.fib,
+.fi {
+    background-size: contain;
+    background-position: 50%;
+    background-repeat: no-repeat
+}
+
+.fi {
+    position: relative;
+    display: inline-block;
+    width: 1.333333em;
+    line-height: 1em
+}
+
+.fi:before {
+    content: " "
+}
+
+.fi.fis {
+    width: 1em
+}
+
+.fi-en {
+    background-image: url(./flags/4_3us.svg)
+}
+
+.fi-en.fis {
+    background-image: url(./flags/1_1us.svg)
+}
+
+.fi {
+    vertical-align: middle
+}

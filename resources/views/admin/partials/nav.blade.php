@@ -15,10 +15,30 @@
             </div>
         </div>
         <ul class="navbar-nav flex-row align-items-center ms-auto">
-            <li class="nav-item lh-1 me-3">
-                <a class="github-button" href="https://github.com/themeselection/sneat-html-admin-template-free"
-                    data-icon="octicon-star" data-size="large" data-show-count="true"
-                    aria-label="Star themeselection/sneat-html-admin-template-free on GitHub">Star</a>
+            <li class="nav-item dropdown-language dropdown me-2 me-xl-0">
+                <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                    <i class="fi fi-en fis rounded-circle me-1 fs-3"></i>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end">
+                    <li>
+                        <a class="dropdown-item" href="javascript:void(0);" data-language="vi">
+                            <i class="fi fi-en fis rounded-circle fs-4 me-1"></i>
+                            <span class="align-middle">Vietname</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item selected" href="javascript:void(0);" data-language="en">
+                            <i class="fi fi-en fis rounded-circle fs-4 me-1"></i>
+                            <span class="align-middle">English</span>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+            <li class="nav-item me-3 me-xl-0">
+                <a class="nav-link style-switcher-toggle hide-arrow" href="javascript:void(0);">
+                    <i class="bx bx-sm bx-bell"></i>
+                    <span class="badge bg-danger rounded-pill badge-notifications">5</span>
+                </a>
             </li>
             <li class="nav-item navbar-dropdown dropdown-user dropdown">
                 <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">

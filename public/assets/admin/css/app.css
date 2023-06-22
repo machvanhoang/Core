@@ -1,0 +1,31 @@
+.badge.badge-notifications {
+  position: absolute;
+  display: inline-block;
+  margin: 0;
+  transform: translate(-50%, -30%);
+  padding: 0.2rem 0.4rem;
+  font-size: 0.582rem;
+  line-height: 0.75rem;
+}
+
+.bg-footer-theme {
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  left: 16.25rem;
+  box-shadow: 0 0 0.375rem 0.25rem rgba(161, 172, 184, 0.15);
+}
+
+@media screen and (max-width: 600px) {
+  .bg-footer-theme {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    text-align: center;
+  }
+  .buy-now .btn-buy-now {
+    bottom: 6rem;
+    right: 1.125rem;
+  }
+}/*# sourceMappingURL=app.css.map */
