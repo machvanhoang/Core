@@ -217,15 +217,21 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.settings.index') }}" class="menu-link">
                         <div data-i18n="General">General</div>
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="" class="menu-link">
+                    <a href="{{ route('admin.settings.email.index') }}" class="menu-link">
+                        <div data-i18n="Payment">Email</div>
+                    </a>
+                </li>
+                <li class="menu-item">
+                    <a href="{{ route('admin.settings.payment_method.index') }}" class="menu-link">
                         <div data-i18n="Payment">Payment method</div>
                     </a>
                 </li>
+                
             </ul>
         </li>
     </ul>
