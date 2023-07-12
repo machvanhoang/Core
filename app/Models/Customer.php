@@ -10,7 +10,8 @@ use Illuminate\Notifications\Notifiable;
 class Customer extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
-    protected $fillable = ['customer_status_id', 'full_name', 'phone', 'email', 'address', 'avatar', 'username', 'password', 'remember_token'];
+    protected $table = 'customer';
+    protected $fillable = ['customer_status_id', 'full_name', 'phone', 'email', 'address', 'media_id', 'username', 'verify_code', 'password', 'remember_token'];
     /**
      * The attributes that should be hidden for serialization.
      *

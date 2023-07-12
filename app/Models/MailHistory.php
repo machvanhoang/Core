@@ -9,11 +9,5 @@ class MailHistory extends Model
 {
     use HasFactory;
     protected $table = 'mail_histories';
-    protected $fillable = [
-        'subject',
-        'blade_file',
-        'content',
-        'type',
-        'object_id'
-    ];
+    protected $fillable = ['subject', 'blade_file', 'content', 'type', 'object_id'];
 }

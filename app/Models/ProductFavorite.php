@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MailType extends Model
+class ProductFavorite extends Model
 {
     use HasFactory;
-    protected $table = 'mail_type';
-    protected $fillable = ['type'];
+    protected $table = 'product_favorite';
+    protected $fillable = ['customer_id', 'product_id', 'sort'];
 }

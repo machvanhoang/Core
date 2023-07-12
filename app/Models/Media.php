@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class MailType extends Model
+class Media extends Model
 {
     use HasFactory;
-    protected $table = 'mail_type';
-    protected $fillable = ['type'];
+    protected $table = 'media';
+    protected $fillable = ['alt', 'type', 'extention', 'file_name', 'sort'];
 }

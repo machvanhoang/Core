@@ -40,6 +40,6 @@ class EmailTypeSeeder extends Seeder
                 'updated_at' => now()
             ],
         ];
-        DB::table('mail_types')->insert($data);
+        DB::table('mail_type')->insert($data);
     }
 }
