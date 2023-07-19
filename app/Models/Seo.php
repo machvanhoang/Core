@@ -9,4 +9,5 @@ class Seo extends Model
 {
     use HasFactory;
     protected $table = 'seo';
+    protected $fillable = ['title', 'keyword', 'description', 'url', 'type','image','fb_image','tw_image','pr_image','ig_image','lk_image'];
 }

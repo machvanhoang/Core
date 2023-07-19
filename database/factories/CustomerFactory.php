@@ -23,7 +23,7 @@ class CustomerFactory extends Factory
             'phone' => '0987654321',
             'email' => fake()->unique()->safeEmail(),
             'address' =>  Str::random(100),
-            'avatar' => Str::random(10) . ".jpg",
+            'media_id' => 0,
             'username' => Str::random(5),
             'password' => bcrypt('customer'),
             'remember_token' => null,

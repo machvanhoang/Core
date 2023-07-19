@@ -12,10 +12,11 @@ return new class extends Migration {
     {
         Schema::create('seo', function (Blueprint $table) {
             $table->id();
-            $table->string('type')->nullable();
             $table->string('title')->nullable();
             $table->string('keyword')->nullable();
             $table->string('description')->nullable();
+            $table->string('url')->nullable();
+            $table->string('type')->nullable();
             $table->integer('image')->default(0);
             $table->integer('fb_image')->default(0);
             $table->integer('tw_image')->default(0);

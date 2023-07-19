@@ -9,7 +9,7 @@ class MailTemplate extends Model
 {
     use HasFactory;
     protected $table = 'mail_templates';
-    protected $fillable = ['mail_type_id', 'subject', 'content', 'blade_file'];
+    protected $fillable = ['mail_type_id', 'subject', 'blade_file'];
     public function mailType()
     {
         return $this->belongsTo(MailType::class);

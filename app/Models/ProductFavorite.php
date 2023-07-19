@@ -9,5 +9,5 @@ class ProductFavorite extends Model
 {
     use HasFactory;
     protected $table = 'product_favorite';
-    protected $fillable = ['customer_id', 'product_id', 'sort'];
+    protected $fillable = ['customer_id', 'product_id', 'status', 'sort'];
 }

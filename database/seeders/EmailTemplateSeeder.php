@@ -18,40 +18,35 @@ class EmailTemplateSeeder extends Seeder
             [
                 'mail_type_id' => EmailType::CONTACT->value,
                 'subject' => 'Contact',
-                'content' => 'Contact',
-                'blade_file' => EmailTemplateTrait::formatEmailTemplateFileName('Contact'),
+                'blade_file' => 'contact',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'mail_type_id' => EmailType::ORDERS->value,
                 'subject' => 'Orders',
-                'content' => 'Orders',
-                'blade_file' => EmailTemplateTrait::formatEmailTemplateFileName('Orders'),
+                'blade_file' => 'orders',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'mail_type_id' => EmailType::NOFICATIONS->value,
                 'subject' => 'Notifications',
-                'content' => 'Notifications',
-                'blade_file' => EmailTemplateTrait::formatEmailTemplateFileName('Notifications'),
+                'blade_file' => 'notifications',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'mail_type_id' => EmailType::VERIFY_EMAIL->value,
                 'subject' => 'Verify Email',
-                'content' => 'Verify Email',
-                'blade_file' => EmailTemplateTrait::formatEmailTemplateFileName('Verify Email'),
+                'blade_file' => 'verify_email_register',
                 'created_at' => now(),
                 'updated_at' => now()
             ],
             [
                 'mail_type_id' => EmailType::FORGOT_PASSWORD->value,
                 'subject' => 'Forgot Password',
-                'content' => 'Forgot Password',
-                'blade_file' => EmailTemplateTrait::formatEmailTemplateFileName('Forgot Password'),
+                'blade_file' => 'forgot_password',
                 'created_at' => now(),
                 'updated_at' => now()
             ],

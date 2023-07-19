@@ -14,6 +14,8 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('customer_id')->constrained('customer', 'id');
             $table->foreignId('product_id')->constrained('product', 'id');
+            $table->string('status')->default('privated');
+            $table->integer('sort')->default(1);
             $table->timestamps();
         });
     }

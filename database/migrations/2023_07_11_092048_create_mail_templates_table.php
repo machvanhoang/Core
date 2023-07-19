@@ -14,7 +14,6 @@ return new class extends Migration {
             $table->id();
             $table->foreignId('mail_type_id')->constrained('mail_type');
             $table->string('subject');
-            $table->text('content')->nullable();
             $table->string('blade_file');
             $table->timestamps();
         });
