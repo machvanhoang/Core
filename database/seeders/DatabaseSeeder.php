@@ -11,12 +11,15 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
+            OrderStatusSeeder::class,
             CustomerStatusSeeder::class,
             PaymentMethodSeeder::class,
             EmailTypeSeeder::class,
             EmailTemplateSeeder::class,
             UserSeeder::class,
+            PageSeeder::class,
         ]);
+        \App\Models\Counpon::factory(100)->create();
         \App\Models\Customer::factory(10)->create();
     }
 }
