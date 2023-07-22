@@ -18,6 +18,8 @@ class DatabaseSeeder extends Seeder
             EmailTemplateSeeder::class,
             UserSeeder::class,
             PageSeeder::class,
+            ColorSeeder::class,
+            SizeSeeder::class,
         ]);
         \App\Models\Counpon::factory(100)->create();
         \App\Models\Customer::factory(10)->create();

@@ -10,14 +10,12 @@ return new class extends Migration {
      */
     public function up(): void
     {
-        Schema::create('product', function (Blueprint $table) {
+        Schema::create('product_variants', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->nullable();
-            $table->string('slug')->nullable();
-            $table->text('description')->nullable();
-            $table->text('content')->nullable();
+            $table->foreignId('product_id')->constrained('product', 'id');
+            $table->foreignId('size_id')->nullable()->constrained('size', 'id');
+            $table->foreignId('color_id')->nullable()->constrained('color', 'id');
             $table->integer('inventory')->default(0);
-            $table->integer('media_id')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +25,6 @@ return new class extends Migration {
      */
     public function down(): void
     {
-        Schema::dropIfExists('product');
+        Schema::dropIfExists('product_variants');
     }
 };
