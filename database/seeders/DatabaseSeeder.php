@@ -23,5 +23,6 @@ class DatabaseSeeder extends Seeder
         ]);
         \App\Models\Counpon::factory(100)->create();
         \App\Models\Customer::factory(10)->create();
+        \App\Models\Product::factory(100)->create();
     }
 }

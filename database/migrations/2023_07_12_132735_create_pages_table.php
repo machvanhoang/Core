@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->string('name')->nullable();
             $table->string('desc')->nullable();
             $table->text('content')->nullable();
-            $table->integer('media_id')->default(0);
+            $table->integer('media_id')->nullable();
             $table->timestamps();
         });
     }

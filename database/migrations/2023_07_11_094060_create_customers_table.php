@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('phone')->nullable();
             $table->string('email')->nullable();
             $table->string('address')->nullable();
-            $table->integer('media_id')->default(0);
+            $table->integer('media_id')->nullable();
             $table->string('username')->unique();
             $table->string('password');
             $table->string('verify_code')->nullable();
