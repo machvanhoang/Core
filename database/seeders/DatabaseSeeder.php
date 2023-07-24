@@ -1,6 +1,7 @@
 <?php
 
 namespace Database\Seeders;
+
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -20,9 +21,11 @@ class DatabaseSeeder extends Seeder
             PageSeeder::class,
             ColorSeeder::class,
             SizeSeeder::class,
+            CategorySeeder::class,
         ]);
         \App\Models\Counpon::factory(100)->create();
         \App\Models\Customer::factory(10)->create();
         \App\Models\Product::factory(100)->create();
+        \App\Models\Post::factory(100)->create();
     }
 }
