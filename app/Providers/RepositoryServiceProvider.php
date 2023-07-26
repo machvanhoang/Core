@@ -2,6 +2,10 @@
 
 namespace App\Providers;
 
+use App\Repositories\Cart\CartRepository;
+use App\Repositories\Cart\CartRepositoryInterface;
+use App\Repositories\CartItem\CartItemRepository;
+use App\Repositories\CartItem\CartItemRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Color\ColorRepository;
@@ -32,6 +36,8 @@ use App\Repositories\OrderStatus\OrderStatusRepository;
 use App\Repositories\OrderStatus\OrderStatusRepositoryInterface;
 use App\Repositories\Page\PageRepository;
 use App\Repositories\Page\PageRepositoryInterface;
+use App\Repositories\PaymentMethod\PaymentMethodRepository;
+use App\Repositories\PaymentMethod\PaymentMethodRepositoryInterface;
 use App\Repositories\Post\PostRepository;
 use App\Repositories\Post\PostRepositoryInterface;
 use App\Repositories\Product\ProductRepository;
@@ -59,6 +65,8 @@ class RepositoryServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
+        $this->app->singleton(CartRepositoryInterface::class, CartRepository::class);
+        $this->app->singleton(CartItemRepositoryInterface::class, CartItemRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->singleton(ColorRepositoryInterface::class, ColorRepository::class);
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
@@ -74,6 +82,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(OrderDetailRepositoryInterface::class, OrderDetailRepository::class);
         $this->app->singleton(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
         $this->app->singleton(PageRepositoryInterface::class, PageRepository::class);
+        $this->app->singleton(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);
         $this->app->singleton(PostRepositoryInterface::class, PostRepository::class);
         $this->app->singleton(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->singleton(ProductFavoriteRepositoryInterface::class, ProductFavoriterRepository::class);
