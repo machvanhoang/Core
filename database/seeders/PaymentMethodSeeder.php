@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-
+use Illuminate\Support\Str;
 class PaymentMethodSeeder extends Seeder
 {
     /**
@@ -14,7 +14,7 @@ class PaymentMethodSeeder extends Seeder
     {
         DB::table('payment_method')->insert([
             'name' => 'Cash',
-            'desc' => null,
+            'desc' => Str::random(100),
             'created_at' => now(),
             'updated_at' => now()
         ]);

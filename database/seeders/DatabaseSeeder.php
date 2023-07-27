@@ -11,6 +11,7 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
+        \App\Models\Media::factory(50)->create();
         $this->call([
             OrderStatusSeeder::class,
             CustomerStatusSeeder::class,
@@ -26,6 +27,9 @@ class DatabaseSeeder extends Seeder
         \App\Models\Counpon::factory(100)->create();
         \App\Models\Customer::factory(10)->create();
         \App\Models\Product::factory(100)->create();
+        \App\Models\ProductVariant::factory(100)->create();
+        \App\Models\ProductFavorite::factory(50)->create();
         \App\Models\Post::factory(100)->create();
+        \App\Models\Comment::factory(100)->create();
     }
 }

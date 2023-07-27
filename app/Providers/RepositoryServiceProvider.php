@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Cart\CartRepository;
 use App\Repositories\Cart\CartRepositoryInterface;
-use App\Repositories\CartItem\CartItemRepository;
-use App\Repositories\CartItem\CartItemRepositoryInterface;
+use App\Repositories\CartItems\CartItemsRepository;
+use App\Repositories\CartItems\CartItemsRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
 use App\Repositories\Color\ColorRepository;
@@ -30,8 +30,8 @@ use App\Repositories\Media\MediaRepository;
 use App\Repositories\Media\MediaRepositoryInterface;
 use App\Repositories\Order\OrderRepository;
 use App\Repositories\Order\OrderRepositoryInterface;
-use App\Repositories\OrderDetail\OrderDetailRepository;
-use App\Repositories\OrderDetail\OrderDetailRepositoryInterface;
+use App\Repositories\OrderItems\OrderItemsRepository;
+use App\Repositories\OrderItems\OrderItemsRepositoryInterface;
 use App\Repositories\OrderStatus\OrderStatusRepository;
 use App\Repositories\OrderStatus\OrderStatusRepositoryInterface;
 use App\Repositories\Page\PageRepository;
@@ -66,7 +66,7 @@ class RepositoryServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->app->singleton(CartRepositoryInterface::class, CartRepository::class);
-        $this->app->singleton(CartItemRepositoryInterface::class, CartItemRepository::class);
+        $this->app->singleton(CartItemsRepositoryInterface::class, CartItemsRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
         $this->app->singleton(ColorRepositoryInterface::class, ColorRepository::class);
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
@@ -79,7 +79,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(MailTypeRepositoryInterface::class, MailTypeRepository::class);
         $this->app->singleton(MediaRepositoryInterface::class, MediaRepository::class);
         $this->app->singleton(OrderRepositoryInterface::class, OrderRepository::class);
-        $this->app->singleton(OrderDetailRepositoryInterface::class, OrderDetailRepository::class);
+        $this->app->singleton(OrderItemsRepositoryInterface::class, OrderItemsRepository::class);
         $this->app->singleton(OrderStatusRepositoryInterface::class, OrderStatusRepository::class);
         $this->app->singleton(PageRepositoryInterface::class, PageRepository::class);
         $this->app->singleton(PaymentMethodRepositoryInterface::class, PaymentMethodRepository::class);

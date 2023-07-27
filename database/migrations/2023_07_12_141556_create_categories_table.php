@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->integer('parent_id')->default(0);
             $table->string('name')->nullable();
             $table->string('slug')->unique();
-            $table->string('desc')->nullable();
+            $table->string('description')->nullable();
             $table->integer('media_id')->nullable();
             $table->integer('sort')->default(1);
             $table->timestamps();

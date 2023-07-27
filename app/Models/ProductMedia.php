@@ -5,8 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class OrderDetail extends Model
+class ProductMedia extends Model
 {
     use HasFactory;
-    protected $table = 'order_detail';
+    protected $table = 'product_media';
+    protected $fillable = ['product_id', 'media_id', 'sort'];
 }

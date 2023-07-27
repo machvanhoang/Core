@@ -5,9 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Media extends Model
+class OrderItems extends Model
 {
     use HasFactory;
-    protected $table = 'media';
-    protected $fillable = ['alt', 'caption', 'type', 'extention', 'file_name', 'sort'];
+    protected $table = 'order_items';
 }

@@ -16,13 +16,17 @@ class UserSeeder extends Seeder
             'username' => 'admin',
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
-            'password' => bcrypt('admin#123')
+            'password' => bcrypt('admin#123'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
         DB::table('user')->insert([
             'username' => 'content',
             'name' => 'Content',
             'email' => 'content@gmail.com',
-            'password' => bcrypt('content#123')
+            'password' => bcrypt('content#123'),
+            'created_at' => now(),
+            'updated_at' => now(),
         ]);
     }
 }

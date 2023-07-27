@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Illuminate\Support\Str;
+use App\Models\Media;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Product>
@@ -23,8 +24,8 @@ class ProductFactory extends Factory
             'description' => Str::random(200),
             'content' => Str::random(1000),
             'type' => 'product',
-            'inventory' => 1000,
-            'media_id' => 1,
+            'inventory' => rand(1, 1000),
+            'media_id' => Media::inRandomOrder()->first()->id,
         ];
     }
 }
