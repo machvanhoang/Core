@@ -17,12 +17,12 @@ return new class extends Migration {
             $table->string('description')->nullable();
             $table->string('url')->nullable();
             $table->string('type')->nullable();
-            $table->integer('image')->default(0);
-            $table->integer('fb_image')->default(0);
-            $table->integer('tw_image')->default(0);
-            $table->integer('pr_image')->default(0);
-            $table->integer('ig_image')->default(0);
-            $table->integer('lk_image')->default(0);
+            $table->integer('image')->nullable();
+            $table->integer('fb_image')->nullable();
+            $table->integer('tw_image')->nullable();
+            $table->integer('pr_image')->nullable();
+            $table->integer('ig_image')->nullable();
+            $table->integer('lk_image')->nullable();
             $table->timestamps();
         });
     }

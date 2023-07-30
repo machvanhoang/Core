@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
             'password' => bcrypt('admin#123'),
+            'status' => PUBLISHED,
             'created_at' => now(),
             'updated_at' => now(),
         ]);
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'name' => 'Content',
             'email' => 'content@gmail.com',
             'password' => bcrypt('content#123'),
+            'status' => PRIVATED,
             'created_at' => now(),
             'updated_at' => now(),
         ]);

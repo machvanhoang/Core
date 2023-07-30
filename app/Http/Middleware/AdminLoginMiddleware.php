@@ -15,7 +15,9 @@ class AdminLoginMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (auth(ADMIN)->check()) {
+        $auth = auth(ADMIN);
+        $user = $auth->user();
+        if ($auth->check() && $user && $user->email && $user->status === PUBLISHED) {
             return redirect()->route(ADMIN_INDEX);
         }
         return $next($request);

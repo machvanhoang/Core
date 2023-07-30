@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Settings\PaymentMethodController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,16 @@ Route::prefix('admin')->as('admin.')->group(function () {
                 Route::get('', 'index')->name('index');
             });
         });
+        Route::prefix('user')->as('user.')->controller(UserController::class)->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('{user}', 'edit')->name('edit');
+            Route::delete('{user}', 'delete')->name('delete');
+        });
     });
     Route::middleware('admin.login')->controller(AuthController::class)->group(function () {
         Route::get('login', 'loginGet')->name('login.get');
         Route::post('login', 'loginPost')->name('login.post');
         Route::get('forgot-password', 'forgotPassword')->name('forgot.password');
+        Route::get('register', 'registerGet')->name('register.get');
     });
 });

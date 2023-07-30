@@ -198,7 +198,7 @@
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">User & Permission</span></li>
         <li class="menu-item">
-            <a href="tables-basic.html" class="menu-link">
+            <a href="{{ route('admin.user.index') }}" class="menu-link" title="User">
                 <i class="menu-icon tf-icons bx bx-user"></i>
                 <div data-i18n="Users">Users</div>
             </a>
@@ -231,7 +231,7 @@
                         <div data-i18n="Payment">Payment method</div>
                     </a>
                 </li>
-                
+
             </ul>
         </li>
     </ul>

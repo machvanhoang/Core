@@ -4,6 +4,7 @@ namespace App\Observers;
 
 use App\Models\Product;
 use App\Models\Seo;
+use Illuminate\Support\Str;
 
 class ProductObserver
 {
@@ -12,18 +13,20 @@ class ProductObserver
      */
     public function created(Product $product): void
     {
+        $product->slug = Str::slug($product->name);
+        $product->save();
         Seo::create([
             'title' => $product->name,
             'keyword' => $product->name,
-            'description' => $product->description,
+            'description' => $product->description ?? NULL,
             'url' => $product->slug,
             'type' => $product->type,
-            'image' => $product->media_id,
-            'fb_image' => $product->media_id,
-            'tw_image' => $product->media_id,
-            'pr_image' => $product->media_id,
-            'ig_image' => $product->media_id,
-            'lk_image' => $product->media_id,
+            'image' => $product->media_id ?? NULL,
+            'fb_image' => $product->media_id ?? NULL,
+            'tw_image' => $product->media_id ?? NULL,
+            'pr_image' => $product->media_id ?? NULL,
+            'ig_image' => $product->media_id ?? NULL,
+            'lk_image' => $product->media_id ?? NULL,
         ]);
     }
 

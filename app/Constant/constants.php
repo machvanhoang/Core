@@ -8,3 +8,7 @@ define('ADMIN_INDEX', Route::ADMIN_INDEX->value);
 // GUARD
 define('ADMIN', Auth::ADMIN->value);
 define('USER', Auth::USER->value);
+// STATUS
+define('PUBLISHED', 'published');
+define('PRIVATED', 'privated');
+define('BLOCKED', 'blocked');

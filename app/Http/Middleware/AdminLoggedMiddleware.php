@@ -15,7 +15,10 @@ class AdminLoggedMiddleware
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (!auth(ADMIN)->check() && !isset(auth(ADMIN)->user()->email)) {
+        $auth = auth(ADMIN);
+        $user = $auth->user();
+        if (!$auth->check() || !($user && $user->email) || $user->status !== PUBLISHED) {
+            auth(ADMIN)->logout();
             return redirect()->route(ADMIN_LOGIN_GET);
         }
         return $next($request);

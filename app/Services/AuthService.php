@@ -1,12 +1,19 @@
 <?php
 
-namespace App\Services\Admin;
+namespace App\Services;
 
+use App\Repositories\Customer\CustomerRepositoryInterface;
+use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 
 class AuthService
 {
+    public function __construct(
+        private UserRepositoryInterface $userRepository,
+        private CustomerRepositoryInterface $customerRepository
+    ) {
+    }
     public function adminLogin(array $data, string $guard = null)
     {
         if (is_null($guard))

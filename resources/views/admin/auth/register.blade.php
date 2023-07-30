@@ -1,5 +1,5 @@
 @extends('admin.layouts.app-auth')
-@section('title', 'Login - Admin')
+@section('title', 'Register - Admin')
 @section('css')
     <link rel="stylesheet" href="{{ asset('assets/admin/css/auth/page-auth.css') }}" />
 @endsection

@@ -4,7 +4,7 @@ namespace App\Http\Controllers\Admin\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\AdminLoginRequest;
-use App\Services\Admin\AuthService;
+use App\Services\AuthService;
 
 class AuthController extends Controller
 {
@@ -34,5 +34,9 @@ class AuthController extends Controller
     public function forgotPassword()
     {
         return view('admin.auth.forgot-password');
+    }
+    public function registerGet()
+    {
+        return view('admin.auth.register');
     }
 }

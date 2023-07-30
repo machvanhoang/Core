@@ -23,6 +23,10 @@
         </div>
         <div class="layout-overlay layout-menu-toggle"></div>
     </div>
+    <form action="" id="formDelete" role="form" method="POST">
+        @csrf
+        @method('DELETE')
+    </form>
     @include('admin.partials.support')
     @include('admin.partials.js')
 </body>
