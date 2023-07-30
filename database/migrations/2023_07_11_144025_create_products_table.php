@@ -16,7 +16,9 @@ return new class extends Migration {
             $table->string('slug')->unique();
             $table->text('description')->nullable();
             $table->text('content')->nullable();
-            $table->integer('inventory')->default(0);
+            $table->double('regular_price')->default(0);
+            $table->double('sale_price')->default(0);
+            $table->integer('inventory')->nullable();
             $table->integer('media_id')->nullable();
             $table->string('type')->nullable();
             $table->timestamps();

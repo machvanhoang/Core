@@ -24,6 +24,8 @@ class ProductFactory extends Factory
             'description' => Str::random(200),
             'content' => Str::random(1000),
             'type' => 'product',
+            'regular_price' => rand(100000, 100000000),
+            'sale_price' => rand(100000, 100000000),
             'inventory' => rand(1, 1000),
             'media_id' => Media::inRandomOrder()->first()->id,
         ];

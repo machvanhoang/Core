@@ -21,8 +21,6 @@ class ProductVariantFactory extends Factory
     {
         return [
             'product_id' => Product::inRandomOrder()->first()->id,
-            'size_id' => Size::inRandomOrder()->first()->id,
-            'color_id' => Color::inRandomOrder()->first()->id,
             'inventory' => rand(1, 1000),
             'regular_price' => rand(100000, 100000000),
             'sale_price' => rand(100000, 100000000)
