@@ -1,4 +1,10 @@
 @extends('admin.layouts.app')
+@section('breadcrumb')
+    <div class="d-flex justify-content-between mb-3">
+        <h4 class="fw-bold"><span class="text-muted fw-light">Admin/</span> User</h4>
+        <a href="{{ route('admin.user.create') }}" class="btn btn-primary">Add user</a>
+    </div>
+@endsection
 @section('content')
     <div class="row">
         <div class="col-md-12">

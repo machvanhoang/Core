@@ -38,7 +38,10 @@ Route::prefix('admin')->as('admin.')->group(function () {
         });
         Route::prefix('user')->as('user.')->controller(UserController::class)->group(function () {
             Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
             Route::get('{user}', 'edit')->name('edit');
+            Route::put('{user}', 'update')->name('update');
             Route::delete('{user}', 'delete')->name('delete');
         });
     });

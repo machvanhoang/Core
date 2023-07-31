@@ -14,6 +14,8 @@
                 @include('admin.partials.nav')
                 <div class="content-wrapper">
                     <div class="container-xxl flex-grow-1 container-p-y">
+                        @yield('breadcrumb')
+                        @include('admin.partials.alert')
                         @yield('content')
                     </div>
                     @include('admin.partials.footer')

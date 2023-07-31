@@ -10,6 +10,10 @@
     @yield('content')
     @include('admin.partials.support')
     @include('admin.partials.js')
+    <form action="" method="POST" role="form" id="formDelete">
+        @csrf
+        @method('DELETE')
+    </form>
 </body>
 
 </html>
