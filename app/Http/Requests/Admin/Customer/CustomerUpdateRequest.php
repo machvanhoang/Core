@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Http\Requests\Admin\User;
+namespace App\Http\Requests\Admin\Customer;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class UserUpdateRequest extends FormRequest
+class CustomerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,24 +22,28 @@ class UserUpdateRequest extends FormRequest
      */
     public function rules(): array
     {
-        $user = $this->route('user');
+        $customer = $this->route('customer');
         return [
-            'name' => [
+            'full_name' => [
                 'required',
                 'min:3',
                 'max:255',
-                Rule::unique('user', 'name')->ignore($user)
+            ],
+            'phone' => [
+                'required',
+                'min:9',
+                'max:11',
             ],
             'email' => [
                 'required',
                 'email',
-                Rule::unique('user', 'email')->ignore($user)
+                Rule::unique('customer', 'email')->ignore($customer)
             ],
             'username' => [
                 'required',
                 'min:3',
                 'max:255',
-                Rule::unique('user', 'username')->ignore($user)
+                Rule::unique('customer', 'username')->ignore($customer)
             ],
             'password' => [
                 'nullable',
@@ -57,7 +61,7 @@ class UserUpdateRequest extends FormRequest
                 'max:255',
                 'same:new_password'
             ],
-            'status' => [
+            'customer_status_id' => [
                 'required',
             ],
         ];

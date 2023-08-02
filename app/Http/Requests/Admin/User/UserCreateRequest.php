@@ -28,15 +28,15 @@ class UserCreateRequest extends FormRequest
                 'max:255',
                 'unique:user',
             ],
+            'email' => [
+                'required',
+                'email',
+                'unique:user',
+            ],
             'username' => [
                 'required',
                 'min:3',
                 'max:255',
-                'unique:user',
-            ],
-            'email' => [
-                'required',
-                'email',
                 'unique:user',
             ],
             'password' => [

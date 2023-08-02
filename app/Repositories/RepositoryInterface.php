@@ -11,7 +11,7 @@ interface RepositoryInterface
      * @param mixed $orderBy
      * @param mixed $search
      * @param mixed $relationships
-     * @return void
+     * @return mixed
      */
     public function paginate($itemPerPage, array $conditions = [], array $orderBy = [], array $search = [], array $relationships = []);
     /**

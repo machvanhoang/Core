@@ -31,4 +31,9 @@ class Customer extends Model
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function status()
+    {
+        return $this->belongsTo(CustomerStatus::class, 'customer_status_id', 'id');
+    }
 }

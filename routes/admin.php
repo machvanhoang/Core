@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\Settings\PaymentMethodController;
 use App\Http\Controllers\Admin\Settings\SettingsController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\UserController;
 
 /*
@@ -26,6 +27,14 @@ Route::prefix('admin')->as('admin.')->group(function () {
         });
         Route::controller(AdminController::class)->group(function () {
             Route::get('', 'index')->name('index');
+        });
+        Route::prefix('customer')->as('customer.')->controller(CustomerController::class)->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('{customer}', 'edit')->name('edit');
+            Route::put('{customer}', 'update')->name('update');
+            Route::delete('{customer}', 'delete')->name('delete');
         });
         Route::prefix('settings')->as('settings.')->group(function () {
             Route::get('', [SettingsController::class, 'index'])->name('index');
