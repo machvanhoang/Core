@@ -8,22 +8,22 @@
     line-height: .75rem;
 }
 
-.bg-footer-theme {
-    position: fixed;
-    bottom: 0;
-    right: 0;
-    left: 16.25rem;
-    box-shadow: 0 0 0.375rem 0.25rem rgba(161, 172, 184, .15);
-}
+// .bg-footer-theme {
+//     position: fixed;
+//     bottom: 0;
+//     right: 0;
+//     left: 16.25rem;
+//     box-shadow: 0 0 0.375rem 0.25rem rgba(161, 172, 184, .15);
+// }
 
 @media screen and (max-width: 600px) {
-    .bg-footer-theme {
-        position: fixed;
-        bottom: 0;
-        left: 0;
-        right: 0;
-        text-align: center;
-    }
+    // .bg-footer-theme {
+    //     position: fixed;
+    //     bottom: 0;
+    //     left: 0;
+    //     right: 0;
+    //     text-align: center;
+    // }
 
     .buy-now .btn-buy-now {
         bottom: 6rem;

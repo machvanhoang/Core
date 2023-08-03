@@ -31,7 +31,7 @@ class UserController extends Controller
     {
         $data = $request->validated();
         $result = $this->userService->create($data);
-        if ($result['error']) {
+        if (isset($result['error'])) {
             return back()->with($result);
         }
         return redirect()->route('admin.user.index')->with($result);

@@ -32,7 +32,7 @@ class CustomerController extends Controller
     {
         $data = $request->validated();
         $result = $this->customerService->create($data);
-        if ($result['error']) {
+        if (isset($result['error'])) {
             return back()->with($result);
         }
         return redirect()->route('admin.customer.index')->with($result);

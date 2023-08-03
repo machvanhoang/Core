@@ -1,24 +1,24 @@
 @extends('admin.layouts.app')
 @section('breadcrumb')
     <div class="d-flex justify-content-between mb-3">
-        <h4 class="fw-bold"><span class="text-muted fw-light">Admin/</span> Customer</h4>
-        <a href="{{ route('admin.customer.create') }}" class="btn btn-primary">Add customer</a>
+        <h4 class="fw-bold"><span class="text-muted fw-light">Admin/</span> Product</h4>
+        <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Add product</a>
     </div>
 @endsection
 @section('content')
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">List of Customer</h5>
+                <h5 class="card-header">List of Product</h5>
                 <div class="table-responsive text-nowrap">
                     <table class="table">
                         <thead class="table-light">
                             <tr>
                                 <th>#No</th>
                                 <th>Name</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Regular price</th>
+                                <th>Sale price</th>
+                                <th>Inventory</th>
                                 <th>Created at</th>
                                 <th>Updated_at</th>
                                 <th>Status</th>
@@ -26,40 +26,39 @@
                             </tr>
                         </thead>
                         <tbody class="table-border-bottom-0">
-                            @if (!$customers->isEmpty())
-                                @foreach ($customers as $key => $customer)
+                            @if (!$products->isEmpty())
+                                @foreach ($products as $key => $product)
                                     <tr>
                                         <td>
                                             {{ $key + 1 }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.customer.edit', $customer) }}">
-                                                <strong>{{ $customer->full_name }}</strong>
+                                            <a href="{{ route('admin.product.edit', $product) }}">
+                                                <strong>{{ $product->name }}</strong>
                                             </a>
                                         </td>
                                         <td>
-                                            {{ $customer->username }}
+                                            {{ number_format($product->regular_price, 0, ',', '.') }}<sup>đ</sup>
                                         </td>
                                         <td>
-                                            {{ $customer->email }}
+                                            {{ number_format($product->sale_price, 0, ',', '.') }}<sup>đ</sup>
                                         </td>
                                         <td>
-                                            {{ $customer->phone }}
+                                            {{ number_format($product->inventory, 0, ',', '.') }}
                                         </td>
                                         <td>
-                                            {{ $customer->created_at->format('d-m-Y H:i:s') }}
+                                            {{ $product->created_at->format('d-m-Y H:i:s') }}
                                         </td>
                                         <td>
-                                            {{ $customer->updated_at->format('d-m-Y H:i:s') }}
+                                            {{ $product->updated_at->format('d-m-Y H:i:s') }}
                                         </td>
                                         <td>
-                                            <span
-                                                class="badge badge-{{ strtolower($customer->status->name) }}">{{ $customer->status->name }}</span>
+                                            <span class="badge badge-published">{{ 'Publisheda' }}</span>
                                         </td>
                                         <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-secondary btn-custom"
-                                                    href="{{ route('admin.customer.edit', $customer) }}">
+                                                    href="{{ route('admin.product.edit', $product) }}">
                                                     <span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-pencil-square"
@@ -72,7 +71,7 @@
                                                     </span>
                                                 </a>
                                                 <a class="btn btn-danger btn-custom btnDelete"
-                                                    href="{{ route('admin.customer.delete', $customer) }}">
+                                                    href="{{ route('admin.product.delete', $product) }}">
                                                     <span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-trash3"
@@ -92,7 +91,7 @@
                 </div>
             </div>
             <div class="d-flex justify-content-center mt-3">
-                {{ $customers->links('pagination::bootstrap-4') }}
+                {{ $products->links('pagination::bootstrap-4') }}
             </div>
         </div>
     </div>
