@@ -18,16 +18,20 @@ class ProductFactory extends Factory
      */
     public function definition(): array
     {
-        return [
+        $data = [
+            'user_id' => null,
+            'slug' => null,
             'name' => fake()->unique()->name(),
-            'slug' => Str::slug(fake()->unique()->name()),
-            'description' => Str::random(200),
-            'content' => Str::random(1000),
+            'description' => Str::random(10),
+            'content' => Str::random(10),
             'type' => 'product',
+            'sku' => Str::random(10),
             'regular_price' => rand(100000, 100000000),
             'sale_price' => rand(100000, 100000000),
             'inventory' => rand(1, 1000),
             'media_id' => Media::inRandomOrder()->first()->id,
+            'status' => PRIVATED,
         ];
+        return $data;
     }
 }

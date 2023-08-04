@@ -13,6 +13,8 @@ class CategoryObserver
     public function created(Category $category): void
     {
         Seo::create([
+            'table' => $category->getTable(),
+            'parent_id' => $category->id,
             'title' => $category->name,
             'keyword' => $category->name,
             'description' => $category->description,

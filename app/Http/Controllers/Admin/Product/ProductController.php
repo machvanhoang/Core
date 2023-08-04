@@ -8,6 +8,7 @@ use App\Http\Requests\Admin\Product\ProductCreateRequest;
 use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Services\ProductService;
+use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
@@ -16,43 +17,37 @@ class ProductController extends Controller
         private ProductService $productService
     ) {
     }
-    public function index()
+    public function index(Request $request)
     {
         $products = $this->productRepository->paginate(10, [], ['id' => 'DESC'], [], []);
         return view('admin.product.index', compact('products'));
     }
     public function create()
     {
-        $productStatus = $this->productStatus();
-        return view('admin.product.create', compact('productStatus'));
+        return view('admin.product.create');
     }
     public function store(ProductCreateRequest $request)
     {
         $data = $request->validated();
         $result = $this->productService->create($data);
         if (isset($result['error'])) {
-            return back()->with($result);
+            return back()->withInput()->with($result);
         }
-        return redirect()->route('admin.product.index')->with($result);
+        return redirect()->route('admin.product.edit', ['product' => $result['product'], 'type' => $result['product']->type])->with($result);
     }
     public function edit(Product $product)
     {
-        $productStatus = $this->productStatus();
-        return view('admin.product.edit', compact('product', 'productStatus'));
+        return view('admin.product.edit', compact('product'));
     }
     public function update(ProductUpdateRequest $request, Product $product)
     {
         $data = $request->validated();
         $result = $this->productService->updated($product, $data);
-        return redirect()->route('admin.product.edit', $product)->with($result);
+        return redirect()->route('admin.product.edit', ['product' => $product, 'type' => $product->type])->with($result);
     }
     public function delete(Product $product)
     {
         $result = $this->productService->delete($product);
-        return redirect()->route('admin.product.index', $product)->with($result);
-    }
-    private function productStatus()
-    {
-        return [];
+        return redirect()->route('admin.product.index', ['type' => $product->type])->with($result);
     }
 }

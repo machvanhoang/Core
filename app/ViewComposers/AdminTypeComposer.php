@@ -1,10 +1,10 @@
 <?php
 
-namespace App\View\Composers;
+namespace App\ViewComposers;
 
 use Illuminate\View\View;
 
-class AdminMenuComposer
+class AdminTypeComposer
 {
     /**
      * Create a new profile composer.
@@ -18,7 +18,7 @@ class AdminMenuComposer
      */
     public function compose(View $view): void
     {
-        $type = collect(config('type'));
-        $view->with('type', $type);
+        $type = request()->get('type') ?? null;
+        $view->with(['type' => $type]);
     }
 }

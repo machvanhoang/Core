@@ -37,15 +37,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::put('{customer}', 'update')->name('update');
             Route::delete('{customer}', 'delete')->name('delete');
         });
-        Route::prefix('product')->as('product.')->group(function () {
-            Route::controller(ProductController::class)->group(function () {
-                Route::get('', 'index')->name('index');
-                Route::get('create', 'create')->name('create');
-                Route::post('store', 'store')->name('store');
-                Route::get('{product}', 'edit')->name('edit');
-                Route::put('{product}', 'update')->name('update');
-                Route::delete('{product}', 'delete')->name('delete');
-            });
+        Route::prefix('product')->as('product.')->controller(ProductController::class)->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('create', 'create')->name('create');
+            Route::post('store', 'store')->name('store');
+            Route::get('{product}', 'edit')->name('edit');
+            Route::put('{product}', 'update')->name('update');
+            Route::delete('{product}', 'delete')->name('delete');
         });
         Route::prefix('settings')->as('settings.')->group(function () {
             Route::get('', [SettingsController::class, 'index'])->name('index');

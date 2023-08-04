@@ -2,7 +2,7 @@
 @section('breadcrumb')
     <div class="d-flex justify-content-between mb-3">
         <h4 class="fw-bold"><span class="text-muted fw-light">Admin/</span> Product</h4>
-        <a href="{{ route('admin.product.create') }}" class="btn btn-primary">Add product</a>
+        <a href="{{ route('admin.product.create', ['type' => $type]) }}" class="btn btn-primary">Add product</a>
     </div>
 @endsection
 @section('content')
@@ -33,7 +33,8 @@
                                             {{ $key + 1 }}
                                         </td>
                                         <td>
-                                            <a href="{{ route('admin.product.edit', $product) }}">
+                                            <a
+                                                href="{{ route('admin.product.edit', ['product' => $product, 'type' => $type]) }}">
                                                 <strong>{{ $product->name }}</strong>
                                             </a>
                                         </td>
@@ -53,12 +54,12 @@
                                             {{ $product->updated_at->format('d-m-Y H:i:s') }}
                                         </td>
                                         <td>
-                                            <span class="badge badge-published">{{ 'Publisheda' }}</span>
+                                            <span class="badge badge-{{ $product->status }}">{{ $product->status }}</span>
                                         </td>
                                         <td>
                                             <div class="dropdown">
                                                 <a class="btn btn-secondary btn-custom"
-                                                    href="{{ route('admin.product.edit', $product) }}">
+                                                    href="{{ route('admin.product.edit', ['type' => $type, 'product' => $product]) }}">
                                                     <span>
                                                         <svg xmlns="http://www.w3.org/2000/svg" width="16"
                                                             height="16" fill="currentColor" class="bi bi-pencil-square"

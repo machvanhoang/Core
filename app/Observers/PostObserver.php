@@ -13,6 +13,8 @@ class PostObserver
     public function created(Post $post): void
     {
         Seo::create([
+            'table' => $post->getTable(),
+            'parent_id' => $post->id,
             'title' => $post->name,
             'keyword' => $post->name,
             'description' => $post->description,

@@ -4,10 +4,11 @@ namespace App\Services;
 
 use App\Models\Product;
 use App\Repositories\Product\ProductRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
+use App\Traits\SeoTrait;
 
 class ProductService
 {
+    use SeoTrait;
     public function __construct(
         private ProductRepositoryInterface $productRepository
     ) {
@@ -22,8 +23,10 @@ class ProductService
                     'message' => 'Tạo sản phẩm lỗi.'
                 ];
             }
+            $this->createSeo($product, $data);
             return [
                 'success' => true,
+                'product' => $product,
                 'message' => 'Tạo sản phẩm thành công.'
             ];
         } catch (\Throwable $th) {
@@ -36,21 +39,8 @@ class ProductService
     public function updated(Product $product, array $data = []): array
     {
         try {
-            $product->full_name = $data['full_name'];
-            $product->username = $data['username'];
-            $product->phone = $data['phone'];
-            $product->email = $data['email'];
-            $product->customer_status_id = $data['customer_status_id'];
-            if ($data['password'] && $data['new_password'] && $data['new_confirm_password']) {
-                if (!Hash::check($data['password'], $product->password)) {
-                    return [
-                        'error' => true,
-                        'message' => 'Mật khẩu cũ không đúng.'
-                    ];
-                }
-                $product->password = Hash::make($data['new_password']);
-            }
-            $product->save();
+            $product->update($data);
+            $this->createSeo($product, $data);
             return [
                 'success' => true,
                 'message' => 'Cập nhật sản phẩm thành công.'
@@ -65,7 +55,9 @@ class ProductService
     public function delete(Product $product)
     {
         try {
+            $newProduct = $product;
             $product->delete();
+            $this->deleteSeo($newProduct);
             return [
                 'success' => true,
                 'message' => 'Xóa sản phẩm thành công.'

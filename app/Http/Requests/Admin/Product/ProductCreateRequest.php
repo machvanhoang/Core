@@ -11,7 +11,7 @@ class ProductCreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,69 @@ class ProductCreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'name' => [
+                'required',
+                'min:3',
+                'max:255',
+                'unique:product',
+            ],
+            'description' => [
+                'nullable',
+                'min:3',
+                'max:255',
+            ],
+            'content' => [
+                'nullable',
+                'min:3',
+                'max:10000',
+            ],
+            'sku' => [
+                'required',
+                'string',
+                'min:1',
+                'max:255',
+            ],
+            'regular_price' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000000000',
+            ],
+            'sale_price' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000000000',
+            ],
+            'inventory' => [
+                'required',
+                'numeric',
+                'min:1',
+                'max:1000000000',
+            ],
+            'type' => [
+                'required',
+                'string'
+            ],
+            'status' => [
+                'required',
+                'string'
+            ],
+            'seo_title' => [
+                'required',
+                'min:3',
+                'max:255',
+            ],
+            'seo_keyword' => [
+                'required',
+                'min:3',
+                'max:255',
+            ],
+            'seo_description' => [
+                'required',
+                'min:3',
+                'max:255',
+            ],
         ];
     }
 }

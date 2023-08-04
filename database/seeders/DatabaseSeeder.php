@@ -25,12 +25,12 @@ class DatabaseSeeder extends Seeder
             SizeSeeder::class,
             CategorySeeder::class,
         ]);
-        \App\Models\Counpon::factory(100)->create();
-        \App\Models\Customer::factory(100)->create();
-        \App\Models\Product::factory(100)->create();
-        \App\Models\ProductVariant::factory(100)->create();
-        \App\Models\ProductFavorite::factory(50)->create();
-        \App\Models\Post::factory(100)->create();
-        \App\Models\Comment::factory(100)->create();
+        \App\Models\Counpon::factory(20)->create();
+        \App\Models\Customer::factory(20)->create();
+        \App\Models\Product::factory(20)->create();
+        \App\Models\ProductVariant::factory(20)->create();
+        \App\Models\ProductFavorite::factory(20)->create();
+        \App\Models\Post::factory(20)->create();
+        \App\Models\Comment::factory(20)->create();
     }
 }

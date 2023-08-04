@@ -12,3 +12,11 @@ define('USER', Auth::USER->value);
 define('PUBLISHED', 'published');
 define('PRIVATED', 'privated');
 define('BLOCKED', 'blocked');
+// ARRAY STATUS
+define('STATUS', [
+    PRIVATED => PRIVATED,
+    PUBLISHED => PUBLISHED,
+    BLOCKED => BLOCKED
+]);
+// ADMIN TYPE DEFAULT
+define('PRODUCT_TYPE', 'product');

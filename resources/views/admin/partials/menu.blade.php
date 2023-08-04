@@ -78,7 +78,7 @@
                     </a>
                 </li>
                 <li class="menu-item">
-                    <a href="{{ route('admin.product.index') }}" class="menu-link">
+                    <a href="{{ route('admin.product.index', ['type' => 'product']) }}" class="menu-link">
                         <div data-i18n="Accordion">Product</div>
                     </a>
                 </li>
@@ -144,7 +144,6 @@
                         <div data-i18n="Payment">Payment method</div>
                     </a>
                 </li>
-
             </ul>
         </li>
     </ul>

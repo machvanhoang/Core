@@ -4,7 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-return new class extends Migration {
+return new class extends Migration
+{
     /**
      * Run the migrations.
      */
@@ -12,6 +13,8 @@ return new class extends Migration {
     {
         Schema::create('seo', function (Blueprint $table) {
             $table->id();
+            $table->string('table')->nullable();
+            $table->string('parent_id')->nullable();
             $table->string('title')->nullable();
             $table->string('keyword')->nullable();
             $table->string('description')->nullable();
