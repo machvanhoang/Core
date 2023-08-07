@@ -61,12 +61,6 @@
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Applications</span></li>
         <li class="menu-item">
-            <a href="{{ route('admin.customer.index') }}" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-user"></i>
-                <div data-i18n="Basic">Customer</div>
-            </a>
-        </li>
-        <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-box"></i>
                 <div data-i18n="User interface">Product</div>
@@ -83,6 +77,12 @@
                     </a>
                 </li>
             </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.customer.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div data-i18n="Basic">Customer</div>
+            </a>
         </li>
         <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">

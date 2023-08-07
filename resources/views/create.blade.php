@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Create</title>
+
 </head>
+
 <body>
     <form action="{{ route('store') }}" role="form" method="POST">
         @csrf
@@ -13,11 +16,11 @@
             <input type="text" name="name" value="{{ old('name') }}" placeholder="Product name" />
         </div>
         <hr>
-        <div >
+        <div>
             <textarea name="description" id="description" cols="30" rows="5">{{ old('description') }}</textarea>
         </div>
         <hr>
-        <div >
+        <div>
             <textarea name="content" id="content" cols="30" rows="10">{{ old('content') }}</textarea>
         </div>
         <div>
@@ -33,4 +36,5 @@
         <button type="submit">Save product</button>
     </form>
 </body>
+
 </html>

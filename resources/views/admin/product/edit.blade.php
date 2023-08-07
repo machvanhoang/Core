@@ -48,24 +48,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="card mb-4">
-                    <div class="card-header custom border-bottom">
-                        <h4>Media</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="mt-3 mb-3">
-                            <label for="media_id" class="form-label">Media id</label>
-                            <input type="text" class="form-control @error('media_id')is-invalid @enderror"
-                                name="media_id" value="{{ old('media_id') ?? $product->media_id }}" id="media_id"
-                                placeholder="">
-                            @error('media_id')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
+
                 <div class="card mb-4">
                     <div class="card-header custom border-bottom">
                         <h4>Price</h4>
@@ -124,6 +107,16 @@
                                     </div>
                                 @enderror
                             </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header custom border-bottom">
+                        <h4>Variants</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+
                         </div>
                     </div>
                 </div>
@@ -234,6 +227,46 @@
                             </div>
                             <input type="text" class="form-control @error('tags')is-invalid @enderror" name="tags"
                                 value="" id="tags" placeholder="">
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header custom border-bottom">
+                        <h4>Avatar</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-3 mb-3">
+                            <div class="photoUpload-zone">
+                                <label class="photoUpload-file" id="photo-zone" for="file-zone">
+                                    <input type="file" name="file" id="file-zone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
+                                    <p class="photoUpload-or">hoặc</p>
+                                    <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
+                                </label>
+                                <div class="photoUpload-dimension">Width: 300 px - Height: 200 px
+                                    (.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF)</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card mb-4">
+                    <div class="card-header custom border-bottom">
+                        <h4>Gallery</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="mt-3 mb-3">
+                            <div class="photoUpload-zone">
+                                <label class="photoUpload-file" id="photo-zone" for="file-zone">
+                                    <input type="file" name="file" multiple id="file-zone">
+                                    <i class="fas fa-cloud-upload-alt"></i>
+                                    <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
+                                    <p class="photoUpload-or">hoặc</p>
+                                    <p class="photoUpload-choose btn btn-sm bg-gradient-success">Chọn hình</p>
+                                </label>
+                                <div class="photoUpload-dimension">Width: 300 px - Height: 200 px
+                                    (.jpg|.gif|.png|.jpeg|.gif|.JPG|.PNG|.JPEG|.Png|.GIF)</div>
+                            </div>
                         </div>
                     </div>
                 </div>

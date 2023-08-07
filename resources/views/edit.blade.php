@@ -9,7 +9,7 @@
 </head>
 
 <body>
-    <form action="{{ route('update',$product) }}" role="form" method="POST">
+    <form action="{{ route('update', $product) }}" role="form" method="POST">
         @csrf
         @method('PUT')
         <ul>
