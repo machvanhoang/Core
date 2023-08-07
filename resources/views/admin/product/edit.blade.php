@@ -116,7 +116,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-
+                            <a href="" class="btn btn-warning mt-1">Setting variants</a>
                         </div>
                     </div>
                 </div>

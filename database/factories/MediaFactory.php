@@ -23,7 +23,8 @@ class MediaFactory extends Factory
             'type' => 'media',
             'extention' => 'jpg',
             'file_name' => Str::random(5) . ".jpg",
-            'sort' => '1'
+            'sort' => '1',
+            'status' => 1,
         ];
     }
 }
