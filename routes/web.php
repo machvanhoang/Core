@@ -32,5 +32,4 @@ Route::put('update', function (Request $request) {
 
 Route::prefix('media')->controller(MediaController::class)->group(function () {
     Route::post('single', 'single')->name('single');
-    Route::post('multiple', 'multiple')->name('multiple');
 });

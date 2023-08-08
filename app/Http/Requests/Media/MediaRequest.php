@@ -11,7 +11,7 @@ class MediaRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
@@ -22,7 +22,13 @@ class MediaRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'file' => [
+                'required',
+                'max:102400',
+            ],
+            'type' => [
+                'required',
+            ],
         ];
     }
 }

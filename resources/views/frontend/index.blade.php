@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Laravel</title>
     <link rel="preconnect" href="https://fonts.bunny.net">
     <link href="https://fonts.bunny.net/css?family=figtree:400,600&display=swap" rel="stylesheet" />
@@ -40,7 +41,41 @@
     </div>
     <script>
         $('[name="multiple"]').on('change', function(e) {
-            console.log(e.target.files);
+            const files = e.target.files;
+            if (files.length) {
+                for (let i = 0; i < files.length; i++) {
+                    const formData = new FormData();
+                    formData.append('file', files[i]);
+                    formData.append('type', 'multiple');
+                    $.ajax({
+                        url: "{{ route('single') }}",
+                        type: "POST",
+                        data: formData,
+                        processData: false,
+                        contentType: false,
+                        success: function(response) {
+                            console.log(response);
+                        }
+                    });
+                }
+            }
+        });
+        $('[name="single"]').on('change', async function(e) {
+            console.log('single');
+            const files = e.target.files;
+            const formData = new FormData();
+            formData.append('file', files[0]);
+            formData.append('type', 'media');
+            await $.ajax({
+                url: "{{ route('single') }}",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function(response) {
+                    console.log(response);
+                }
+            });
         });
     </script>
 </body>
