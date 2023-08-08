@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Repositories\Attributes\AttributesRepository;
+use App\Repositories\Attributes\AttributesRepositoryInterface;
 use App\Repositories\Cart\CartRepository;
 use App\Repositories\Cart\CartRepositoryInterface;
 use App\Repositories\CartItems\CartItemsRepository;
@@ -92,6 +94,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(SizeRepositoryInterface::class, SizeRepository::class);
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(WardRepositoryInterface::class, WardRepository::class);
+        $this->app->singleton(AttributesRepositoryInterface::class, AttributesRepository::class);
     }
 
     /**

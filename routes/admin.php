@@ -50,6 +50,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::prefix('attribute')->as('attribute.')->controller(AttributeController::class)->group(function () {
                 Route::get('', 'index')->name('index');
                 Route::get('{product}', 'product')->name('product');
+                Route::post('{product}/store', 'storeProduct')->name('store_product');
             });
         });
         Route::prefix('settings')->as('settings.')->group(function () {
