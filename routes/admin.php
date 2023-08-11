@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\Settings\EmailController;
-use App\Http\Controllers\Admin\Settings\PaymentMethodController;
-use App\Http\Controllers\Admin\Settings\SettingsController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\EmailController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\Auth\AuthController;
+use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\Product\AttributeController;
 use App\Http\Controllers\Admin\Product\ProductController;
@@ -53,14 +53,20 @@ Route::prefix('admin')->as('admin.')->group(function () {
                 Route::post('{product}/store', 'storeProduct')->name('store_product');
             });
         });
-        Route::prefix('settings')->as('settings.')->group(function () {
-            Route::get('', [SettingsController::class, 'index'])->name('index');
-            Route::prefix('email')->as('email.')->controller(EmailController::class)->group(function () {
-                Route::get('', 'index')->name('index');
-            });
-            Route::prefix('payment_method')->as('payment_method.')->controller(PaymentMethodController::class)->group(function () {
-                Route::get('', 'index')->name('index');
-            });
+        Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::put('{config}', 'update')->name('update');
+        });
+        Route::prefix('email')->as('email.')->controller(EmailController::class)->group(function () {
+            Route::get('', 'index')->name('index');
+            Route::get('{email}', 'edit')->name('edit');
+            Route::put('{email}', 'update')->name('update');
+        });
+        Route::prefix('payment_method')->as('payment_method.')->controller(PaymentMethodController::class)->group(function () {
+            Route::get('{paymentMethod?}', 'index')->name('index');
+            Route::post('store', 'store')->name('store');
+            Route::put('{paymentMethod}', 'update')->name('update');
+            Route::delete('{paymentMethod}', 'delete')->name('delete');
         });
         Route::prefix('user')->as('user.')->controller(UserController::class)->group(function () {
             Route::get('', 'index')->name('index');

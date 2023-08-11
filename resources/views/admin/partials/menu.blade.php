@@ -56,14 +56,20 @@
         <li class="menu-item active">
             <a href="{{ route('admin.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-home-circle"></i>
-                <div data-i18n="Analytics">Dashboard</div>
+                <div data-i18n="Analytics">Home</div>
             </a>
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">Applications</span></li>
         <li class="menu-item">
+            <a href="#order" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-shopping-bag"></i>
+                <div data-i18n="Order">Order</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-box"></i>
-                <div data-i18n="User interface">Product</div>
+                <i class="menu-icon tf-icons bx bxl-product-hunt"></i>
+                <div data-i18n="Product">Product</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
@@ -76,6 +82,11 @@
                         <div data-i18n="Accordion">Product</div>
                     </a>
                 </li>
+                <li class="menu-item">
+                    <a href="#" class="menu-link">
+                        <div data-i18n="Accordion">Category</div>
+                    </a>
+                </li>
             </ul>
         </li>
         <li class="menu-item">
@@ -86,8 +97,8 @@
         </li>
         <li class="menu-item">
             <a href="javascript:void(0)" class="menu-link menu-toggle">
-                <i class="menu-icon tf-icons bx bx-copy"></i>
-                <div data-i18n="Extended UI">Extended UI</div>
+                <i class="menu-icon tf-icons bx bx-news"></i>
+                <div data-i18n="Extended UI">Pages</div>
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
@@ -102,11 +113,10 @@
                 </li>
             </ul>
         </li>
-
         <li class="menu-item">
             <a href="icons-boxicons.html" class="menu-link">
-                <i class="menu-icon tf-icons bx bx-crown"></i>
-                <div data-i18n="Boxicons">Boxicons</div>
+                <i class="menu-icon tf-icons bx bx-image-alt"></i>
+                <div data-i18n="Boxicons">Media</div>
             </a>
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">User & Permission</span></li>
@@ -124,27 +134,22 @@
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">General</span></li>
         <li class="menu-item">
-            <a href="javascript:void(0);" class="menu-link menu-toggle">
+            <a href="{{ route('admin.config.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
-                <div data-i18n="Settings">Settings</div>
+                <div data-i18n="Configs">Configs</div>
             </a>
-            <ul class="menu-sub">
-                <li class="menu-item">
-                    <a href="{{ route('admin.settings.index') }}" class="menu-link">
-                        <div data-i18n="General">General</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.settings.email.index') }}" class="menu-link">
-                        <div data-i18n="Payment">Email</div>
-                    </a>
-                </li>
-                <li class="menu-item">
-                    <a href="{{ route('admin.settings.payment_method.index') }}" class="menu-link">
-                        <div data-i18n="Payment">Payment method</div>
-                    </a>
-                </li>
-            </ul>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.email.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-envelope-open"></i>
+                <div data-i18n="Email">Email</div>
+            </a>
+        </li>
+        <li class="menu-item">
+            <a href="{{ route('admin.payment_method.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxl-paypal"></i>
+                <div data-i18n="Payment method">Payment method</div>
+            </a>
         </li>
     </ul>
 </aside>

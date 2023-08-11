@@ -14,7 +14,7 @@ class PaymentMethodSeeder extends Seeder
     {
         DB::table('payment_method')->insert([
             'name' => 'Cash',
-            'desc' => Str::random(100),
+            'description' => Str::random(100),
             'created_at' => now(),
             'updated_at' => now()
         ]);

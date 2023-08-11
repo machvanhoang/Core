@@ -10,10 +10,10 @@ use App\Repositories\CartItems\CartItemsRepository;
 use App\Repositories\CartItems\CartItemsRepositoryInterface;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Category\CategoryRepositoryInterface;
-use App\Repositories\Color\ColorRepository;
-use App\Repositories\Color\ColorRepositoryInterface;
 use App\Repositories\Comment\CommentRepository;
 use App\Repositories\Comment\CommentRepositoryInterface;
+use App\Repositories\Config\ConfigRepository;
+use App\Repositories\Config\ConfigRepositoryInterface;
 use App\Repositories\Counpon\CounponRepository;
 use App\Repositories\Counpon\CounponRepositoryInterface;
 use App\Repositories\Customer\CustomerRepository;
@@ -52,8 +52,6 @@ use App\Repositories\Province\ProvinceRepository;
 use App\Repositories\Province\ProvinceRepositoryInterface;
 use App\Repositories\Seo\SeoRepository;
 use App\Repositories\Seo\SeoRepositoryInterface;
-use App\Repositories\Size\SizeRepository;
-use App\Repositories\Size\SizeRepositoryInterface;
 use App\Repositories\Ward\WardRepository;
 use App\Repositories\Ward\WardRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -70,7 +68,6 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(CartRepositoryInterface::class, CartRepository::class);
         $this->app->singleton(CartItemsRepositoryInterface::class, CartItemsRepository::class);
         $this->app->singleton(CategoryRepositoryInterface::class, CategoryRepository::class);
-        $this->app->singleton(ColorRepositoryInterface::class, ColorRepository::class);
         $this->app->singleton(CommentRepositoryInterface::class, CommentRepository::class);
         $this->app->singleton(CounponRepositoryInterface::class, CounponRepository::class);
         $this->app->singleton(CustomerRepositoryInterface::class, CustomerRepository::class);
@@ -91,10 +88,10 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ProductVariantRepositoryInterface::class, ProductVariantRepository::class);
         $this->app->singleton(ProvinceRepositoryInterface::class, ProvinceRepository::class);
         $this->app->singleton(SeoRepositoryInterface::class, SeoRepository::class);
-        $this->app->singleton(SizeRepositoryInterface::class, SizeRepository::class);
         $this->app->singleton(UserRepositoryInterface::class, UserRepository::class);
         $this->app->singleton(WardRepositoryInterface::class, WardRepository::class);
         $this->app->singleton(AttributesRepositoryInterface::class, AttributesRepository::class);
+        $this->app->singleton(ConfigRepositoryInterface::class, ConfigRepository::class);
     }
 
     /**

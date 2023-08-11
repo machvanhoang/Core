@@ -68,7 +68,7 @@ interface RepositoryInterface
 
     /**
      * Summary of first
-     * @return void
+     * @return mixed
      */
     public function first();
 

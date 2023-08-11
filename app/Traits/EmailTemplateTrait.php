@@ -33,18 +33,10 @@ trait EmailTemplateTrait
     }
     private static function pathResource($email)
     {
-        $directoryFormTemplates = resource_path('views/admin/setting/email/templates');
+        $directoryFormTemplates = resource_path('views/email');
         if (!File::isDirectory($directoryFormTemplates)) {
             File::makeDirectory($directoryFormTemplates, 0777, true);
         }
-        return $directoryFormTemplates . "/" . $email->file_name . '.blade.php';
-    }
-
-    public static function formatEmailTemplateFileName($file_name)
-    {
-        $file_name = str_replace(' ', '_', $file_name);
-        $file_name = str_replace('-', '_', $file_name);
-        $file_name = preg_replace('/[^A-Za-z0-9_\-]/', '', $file_name);
-        return strtolower($file_name) . '_' . intval(microtime(true) * 1000);
+        return $directoryFormTemplates . "/" . $email->blade_file . '.blade.php';
     }
 }

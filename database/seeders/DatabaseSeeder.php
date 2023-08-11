@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
     {
         \App\Models\Media::factory(50)->create();
         $this->call([
+            ConfigSeeder::class,
             AttributeSeeder::class,
             OrderStatusSeeder::class,
             CustomerStatusSeeder::class,
