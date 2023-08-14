@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Media\MediaRequest;
+use App\Http\Requests\MediaRequest;
 use App\Http\Resources\MediaResource;
 use App\Repositories\Media\MediaRepositoryInterface;
 use App\Traits\MediaTrait;

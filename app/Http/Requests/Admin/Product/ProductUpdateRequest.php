@@ -89,6 +89,15 @@ class ProductUpdateRequest extends FormRequest
                 'min:3',
                 'max:255',
             ],
+            'media_id' => [
+                'nullable',
+                'min:1',
+            ],
+            'media' => [
+                'nullable',
+                'array',
+                'min:1'
+            ],
         ];
     }
 }

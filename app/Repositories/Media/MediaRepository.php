@@ -14,4 +14,9 @@ class MediaRepository extends BaseRepository implements MediaRepositoryInterface
     {
         return Media::class;
     }
+
+    public function getAllMediaByListId(array $listId = [])
+    {
+        return $this->model->whereIn('id', $listId)->get();
+    }
 }

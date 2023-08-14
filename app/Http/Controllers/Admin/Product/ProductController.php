@@ -7,6 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\Product\ProductCreateRequest;
 use App\Http\Requests\Admin\Product\ProductUpdateRequest;
 use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\ProductMedia\ProductMediaRepositoryInterface;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
@@ -14,7 +15,8 @@ class ProductController extends Controller
 {
     public function __construct(
         private ProductRepositoryInterface $productRepository,
-        private ProductService $productService
+        private ProductService $productService,
+        private ProductMediaRepositoryInterface $productMediaRepository
     ) {
     }
     public function index(Request $request)
@@ -37,7 +39,8 @@ class ProductController extends Controller
     }
     public function edit(Product $product)
     {
-        return view('admin.product.edit', compact('product'));
+        $productMedia = $this->productMediaRepository->getAllMediaByProduct($product->id);
+        return view('admin.product.edit', compact('product','productMedia'));
     }
     public function update(ProductUpdateRequest $request, Product $product)
     {

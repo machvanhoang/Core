@@ -235,15 +235,20 @@
                     <div class="card-header custom border-bottom">
                         <h4>Avatar</h4>
                     </div>
+                    @php
+                        $media = app(\App\Repositories\Media\MediaRepositoryInterface::class)->find(old('media_id') ?? $product->media_id);
+                    @endphp
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <div class="photoUpload-zone">
                                 <div class="photoUpload-detail" id="photoUpload-preview">
-                                    <img class="rounded" src="" alt="Alt Photo">
+                                    <img class="rounded" src="{{ $media?->url }}" alt="Alt Photo">
                                 </div>
                                 <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                    <input type="file" name="file" id="file-zone" data-element="#photoUpload-preview" data-type="{{ $type }}"
+                                    <input type="file" name="file" id="file-zone"
+                                        data-element="#photoUpload-preview" data-type="{{ $type }}"
                                         data-url="{{ route('single') }}">
+                                    <input type="hidden" name="media_id" value="{{ $media?->id }}" />
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                     <p class="photoUpload-or">hoặc</p>
@@ -262,12 +267,28 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <div class="appendMutipleFiles">
-
+                                @if (!$productMedia->isEmpty())
+                                    @foreach ($productMedia as $item)
+                                        <div class="file-item" id="deleteMediaItem__{{ $item->media->id }}">
+                                            <img src="{{ $item->media->url }}" alt="{{ $item->media->alt }}" />
+                                            <input type="hidden" name="media[]" value="{{ $item->media->id }}" />
+                                            <button type="button" class="deleteMediaItem"
+                                                data-element="#deleteMediaItem__{{ $item->media->id }}">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                                    fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">
+                                                    <path
+                                                        d="M2.146 2.854a.5.5 0 1 1 .708-.708L8 7.293l5.146-5.147a.5.5 0 0 1 .708.708L8.707 8l5.147 5.146a.5.5 0 0 1-.708.708L8 8.707l-5.146 5.147a.5.5 0 0 1-.708-.708L7.293 8 2.146 2.854Z" />
+                                                </svg>
+                                            </button>
+                                        </div>
+                                    @endforeach
+                                @endif
                             </div>
                             <div class="photoUpload-zone">
                                 <label class="photoUpload-file" id="photo-zone" for="file-zones">
-                                    <input type="file" name="files" multiple id="file-zones" data-element=".appendMutipleFiles" data-type="{{ $type }}"
-                                    data-url="{{ route('single') }}">
+                                    <input type="file" name="files" multiple id="file-zones"
+                                        data-element=".appendMutipleFiles" data-type="{{ $type }}"
+                                        data-url="{{ route('single') }}">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                     <p class="photoUpload-or">hoặc</p>

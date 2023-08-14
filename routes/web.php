@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Frontend\IndexController;
+use App\Http\Controllers\IndexController;
 use App\Http\Controllers\MediaController;
 use Illuminate\Http\Request;
 use App\Models\Product;

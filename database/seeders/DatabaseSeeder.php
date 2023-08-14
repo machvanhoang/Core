@@ -22,8 +22,6 @@ class DatabaseSeeder extends Seeder
             EmailTemplateSeeder::class,
             UserSeeder::class,
             PageSeeder::class,
-            ColorSeeder::class,
-            SizeSeeder::class,
             CategorySeeder::class,
         ]);
         \App\Models\Counpon::factory(20)->create();

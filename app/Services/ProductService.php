@@ -3,14 +3,18 @@
 namespace App\Services;
 
 use App\Models\Product;
+use App\Repositories\Media\MediaRepositoryInterface;
 use App\Repositories\Product\ProductRepositoryInterface;
+use App\Repositories\ProductMedia\ProductMediaRepositoryInterface;
 use App\Traits\SeoTrait;
 
 class ProductService
 {
     use SeoTrait;
     public function __construct(
-        private ProductRepositoryInterface $productRepository
+        private ProductRepositoryInterface $productRepository,
+        private ProductMediaRepositoryInterface $productMediaRepository,
+        private MediaRepositoryInterface $mediaRepository
     ) {
     }
     public function create(array $data = [])

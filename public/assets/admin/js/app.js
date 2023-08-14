@@ -33,7 +33,7 @@ $('#file-zone[name="file"]').on('change', function (e) {
             success: function (response) {
                 if (response.success) {
                     const media = response.media;
-                    element.find('img').attr('src', media.temp_url);
+                    element.find('img').attr('src', media.url);
                     element.find('img').attr('alt', media.alt);
                 }
             },
@@ -52,7 +52,7 @@ function updateElement(element, media) {
         const _this = $(el);
         if (!_this.find('img').length) {
             _this.attr('id', `deleteMediaItem__${media.id}`);
-            _this.html(`<img src="${media.temp_url}" alt="${media.alt}" />
+            _this.html(`<img src="${media.url}" alt="${media.alt}" />
             <input type="hidden" name="media[]" value="${media.id}" />
             <button type="button" class="deleteMediaItem" data-element="#deleteMediaItem__${media.id}">
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x-lg" viewBox="0 0 16 16">

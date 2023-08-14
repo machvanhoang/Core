@@ -20,3 +20,5 @@ define('STATUS', [
 ]);
 // ADMIN TYPE DEFAULT
 define('PRODUCT_TYPE', 'product');
+// UPLOADS
+define('UPLOADS', 'uploads');

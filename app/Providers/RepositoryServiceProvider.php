@@ -46,6 +46,8 @@ use App\Repositories\Product\ProductRepository;
 use App\Repositories\Product\ProductRepositoryInterface;
 use App\Repositories\ProductFavorite\ProductFavoriteRepositoryInterface;
 use App\Repositories\ProductFavorite\ProductFavoriterRepository;
+use App\Repositories\ProductMedia\ProductMediaRepository;
+use App\Repositories\ProductMedia\ProductMediaRepositoryInterface;
 use App\Repositories\ProductVariant\ProductVariantRepository;
 use App\Repositories\ProductVariant\ProductVariantRepositoryInterface;
 use App\Repositories\Province\ProvinceRepository;
@@ -92,6 +94,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(WardRepositoryInterface::class, WardRepository::class);
         $this->app->singleton(AttributesRepositoryInterface::class, AttributesRepository::class);
         $this->app->singleton(ConfigRepositoryInterface::class, ConfigRepository::class);
+        $this->app->singleton(ProductMediaRepositoryInterface::class, ProductMediaRepository::class);
     }
 
     /**
