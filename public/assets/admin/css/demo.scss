@@ -368,10 +368,10 @@ body {
 
 .form-select,
 .form-control {
-    border-color: #979696;
+    border-color: #d9dbde;
 
     &:focus {
-        border-color: #979696;
+        border-color: #0052cc;
     }
 }
 
@@ -451,4 +451,99 @@ body {
 
 .photoUpload-zone .photoUpload-file input {
     display: none;
+}
+
+
+
+.appendMutipleFiles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+
+    .file-item {
+        width: 49%;
+        margin-bottom: 0.5rem;
+        position: relative;
+        border-radius: 5px;
+        overflow: hidden;
+        cursor: pointer;
+
+        img {
+            max-width: 100%;
+            border-radius: 5px;
+            width: 202.52px;
+            height: 202.52px;
+        }
+
+        .deleteMediaItem {
+            position: absolute;
+            right: 3px;
+            top: 3px;
+            z-index: 9;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            background: #fff;
+            border-radius: 3px;
+            padding: 0px;
+            margin: 0;
+            height: 30px;
+            width: 30px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.4s ease;
+        }
+
+        &:hover:not(.loading) {
+            &:before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba($color: #000000, $alpha: 0.6);
+                cursor: pointer;
+                z-index: 8;
+                display: block;
+                transition: all 0.4s ease;
+            }
+
+            .deleteMediaItem {
+                display: flex;
+            }
+        }
+
+        &.loading {
+            position: relative;
+            width: 202.52px;
+            height: 202.52px;
+            background: #000000;
+
+            &:after {
+                content: "";
+                position: absolute;
+                z-index: 99;
+                width: 40px;
+                height: 40px;
+                top: calc(50% - 20px);
+                left: calc(50% - 20px);
+                border-radius: 50%;
+                border: 2px solid #fff;
+                border-color: #fff transparent #fff transparent;
+                animation: lds-dual-ring 1.2s linear infinite;
+            }
+        }
+    }
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
 }

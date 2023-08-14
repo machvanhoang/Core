@@ -165,7 +165,7 @@
             <div class="col-md-4">
                 <div class="card mb-4">
                     <div class="card-header custom border-bottom">
-                        <h4>Notifycation</h4>
+                        <h4>Notification</h4>
                     </div>
                     <div class="card-body">
                         <div class="mt-3">

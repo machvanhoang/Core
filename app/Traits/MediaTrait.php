@@ -12,10 +12,10 @@ trait MediaTrait
     }
     private function getPath(string $type = 'media')
     {
-        if (!File::isDirectory('uploads/tmp/')) {
-            File::makeDirectory(public_path('uploads/tmp/'), 0777, true);
+        if (!File::isDirectory('uploads/temp/')) {
+            File::makeDirectory(public_path('uploads/temp/'), 0777, true);
         }
-        return public_path('uploads/tmp/') . $type;
+        return public_path('uploads/temp/') . $type;
     }
     private function makeName(object $image, string $type = 'media', string $extension = null)
     {

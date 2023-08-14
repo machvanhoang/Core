@@ -238,8 +238,12 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <div class="photoUpload-zone">
+                                <div class="photoUpload-detail" id="photoUpload-preview">
+                                    <img class="rounded" src="" alt="Alt Photo">
+                                </div>
                                 <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                    <input type="file" name="file" id="file-zone">
+                                    <input type="file" name="file" id="file-zone" data-element="#photoUpload-preview" data-type="{{ $type }}"
+                                        data-url="{{ route('single') }}">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                     <p class="photoUpload-or">hoặc</p>
@@ -257,9 +261,13 @@
                     </div>
                     <div class="card-body">
                         <div class="mt-3 mb-3">
+                            <div class="appendMutipleFiles">
+
+                            </div>
                             <div class="photoUpload-zone">
-                                <label class="photoUpload-file" id="photo-zone" for="file-zone">
-                                    <input type="file" name="file" multiple id="file-zone">
+                                <label class="photoUpload-file" id="photo-zone" for="file-zones">
+                                    <input type="file" name="files" multiple id="file-zones" data-element=".appendMutipleFiles" data-type="{{ $type }}"
+                                    data-url="{{ route('single') }}">
                                     <i class="fas fa-cloud-upload-alt"></i>
                                     <p class="photoUpload-drop">Kéo và thả hình vào đây</p>
                                     <p class="photoUpload-or">hoặc</p>

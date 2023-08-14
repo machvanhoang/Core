@@ -2,11 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\Media\FileMultipleRequest;
 use App\Http\Requests\Media\MediaRequest;
+use App\Http\Resources\MediaResource;
 use App\Repositories\Media\MediaRepositoryInterface;
 use App\Traits\MediaTrait;
-use Illuminate\Http\Request;
 
 class MediaController extends Controller
 {
@@ -31,12 +30,12 @@ class MediaController extends Controller
                 'extention' => $extension,
                 'file_name' => $name,
                 'sort' => 1,
-                'status' => 0
+                'status' => 0,
             ]);
             return response()->json([
                 'success' => true,
                 'message' => 'File uploaded successfully',
-                'media' => $media,
+                'media' => new MediaResource($media),
             ]);
         }
 
