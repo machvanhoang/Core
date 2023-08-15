@@ -524,4 +524,16 @@ body {
   100% {
     transform: rotate(360deg);
   }
+}
+.btnAttributeEdit svg.bi-pencil {
+  display: inline-block;
+}
+.btnAttributeEdit svg.bi-x-lg {
+  display: none;
+}
+.btnAttributeEdit.open svg.bi-pencil {
+  display: none;
+}
+.btnAttributeEdit.open svg.bi-x-lg {
+  display: inline-block;
 }/*# sourceMappingURL=demo.css.map */

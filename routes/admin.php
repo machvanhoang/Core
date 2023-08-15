@@ -48,12 +48,13 @@ Route::prefix('admin')->as('admin.')->group(function () {
                 Route::delete('{product}', 'delete')->name('delete');
             });
             Route::prefix('attribute')->as('attribute.')->controller(AttributeController::class)->group(function () {
-                Route::get('', 'index')->name('index');
                 Route::prefix('{product}')->group(function () {
-                    Route::get('', 'product')->name('product');
+                    Route::get('{attribute?}', 'index')->name('index');
                     Route::post('store', 'store')->name('store');
+                    Route::put('{attribute}', 'update')->name('update');
                     Route::get('all', 'allAttribute')->name('all');
                     Route::post('save-variant', 'saveVariant')->name('save_variant');
+                    Route::post('update-variant', 'updateVariant')->name('update_variant');
                 });
             });
         });

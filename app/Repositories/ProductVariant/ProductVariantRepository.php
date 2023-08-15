@@ -14,4 +14,13 @@ class ProductVariantRepository extends BaseRepository implements ProductVariantR
     {
         return ProductVariant::class;
     }
+    public function getVariantByProduct(int $productId)
+    {
+        $query = $this->model->with([
+            'product',
+            'attributeValues',
+        ])
+            ->whereProductId($productId);
+        return $query->get();
+    }
 }

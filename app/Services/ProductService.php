@@ -153,4 +153,38 @@ class ProductService
         }
         return $combinations;
     }
+
+    public function updateProductVariant(Product $product, array $data)
+    {
+        if (empty($data['product_variant'])) {
+            return [
+                'error' => false,
+                'message' => 'Chỉnh sửa variant cho product bị lỗi.',
+            ];
+        }
+        try {
+            foreach ($data['product_variant'] as $key => $item) {
+                $dataUpdate = [
+                    'sku' => $item['sku'],
+                    'regular_price' => (int) $item['regular_price'],
+                    'sale_price' => (int) $item['sale_price'],
+                    'inventory' => (int) $item['inventory'],
+                ];
+                $productVariant = $this->productVariantRepository->findOneBy([
+                    'product_id' => $product->id,
+                    'id' => $item['id'],
+                ]);
+                $productVariant->update($dataUpdate);
+            }
+            return [
+                'success' => true,
+                'message' => 'Chỉnh sửa variant cho product hoàn tất.',
+            ];
+        } catch (\Throwable $th) {
+            return [
+                'error' => false,
+                'message' => 'Chỉnh sửa variant cho product bị lỗi.',
+            ];
+        }
+    }
 }
