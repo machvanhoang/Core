@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\Product;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\AttributeRequest;
 use App\Http\Requests\Admin\Product\ProductVariantAttributeRequest;
 use App\Models\Attributes;
 use App\Models\Product;
@@ -26,30 +27,32 @@ class AttributeController extends Controller
         $allVariants = $this->productVariantRepository->getVariantByProduct($product->id);
         $attributes = $this->attributesRepository->getAttributeByProduct($product->id);
         // $combinations = $this->productService->getCombinationsByProduct($product->id);
-        return view('admin.product.attribute.create', compact('product', 'attributes', 'allVariants', 'attribute'));
+        return view('admin.product.attribute.index', compact('product', 'attributes', 'allVariants', 'attribute'));
     }
-    public function store(Product $product, Request $request)
+    public function store(Product $product, AttributeRequest $request)
     {
-        $data = $request->all();
+        $data = $request->validated();
         $this->attributesRepository->create([
-            'name' => $data['attribute_name'],
+            'name' => $data['name'],
             'product_id' => $product->id,
         ]);
         $attributes = $this->attributesRepository->getAttributeByProduct($product->id);
         return response()->json([
             'success' => true,
-            'view' => view('admin.product.attribute.added', compact('attributes'))->render(),
+            'message' => 'Tạo attribute thành công',
+            'view' => view('admin.product.attribute.added', compact('attributes', 'product'))->render(),
         ]);
     }
 
-    public function update(Product $product, Attributes $attribute, Request $request)
+    public function updateAttribute(Product $product, Attributes $attribute, AttributeRequest $request)
     {
-        $attribute_name = $request->attribute_name;
-        $attribute->name = $attribute_name;
+        $data = $request->validated();
+        $attribute->name = $data['name'];
         $attribute->save();
-        return redirect()->route('admin.product.attribute.index', ['product' => $product, 'attribute' => $attribute])->with([
-            'success' => 'true',
-            'message' => 'Thay đổi tên attribute thành công.',
+        return response()->json([
+            'success' => true,
+            'message' => 'Update attribute thành công.',
+            'attributes' => $attribute,
         ]);
     }
     public function allAttribute(Product $product)

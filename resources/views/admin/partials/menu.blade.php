@@ -73,11 +73,6 @@
             </a>
             <ul class="menu-sub">
                 <li class="menu-item">
-                    <a href="ui-accordion.html" class="menu-link">
-                        <div data-i18n="Accordion">Attribute</div>
-                    </a>
-                </li>
-                <li class="menu-item">
                     <a href="{{ route('admin.product.index', ['type' => 'product']) }}" class="menu-link">
                         <div data-i18n="Accordion">Product</div>
                     </a>

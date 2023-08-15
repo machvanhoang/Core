@@ -10,34 +10,23 @@
             <div class="col-md-8">
                 <div class="card mb-4">
                     <div class="card-header custom border-bottom">
-                        <h4>Attributes @if ($attribute)
-                                <span style="color:brown"> [{{ $attribute->name }}]</span>
-                            @else
-                                news
-                            @endif
+                        <h4>Attributes news
                         </h4>
                     </div>
-                    <form
-                        action="{{ $attribute ? route('admin.product.attribute.update', ['product' => $product, 'attribute' => $attribute]) : route('admin.product.attribute.store', $product) }}"
-                        method="POST" role="form" id="attributeStore">
-                        @csrf
-                        <div class="card-body mt-3">
-                            <div class="mt-3 mb-3">
-                                <label for="attribute_name" class="form-label">Attribute Name</label>
-                                <input type="text" class="form-control" id="attribute_name" name="attribute_name"
-                                    placeholder="Enter attributes" value="{{ $attribute ? $attribute->name : '' }}"
+                    <div id="attributeStore">
+                        <div class="card-body">
+                            <div class="mb-3">
+                                <label for="name" class="form-label">Attribute Name</label>
+                                <input type="text" class="form-control" id="name" name="name" placeholder=""
                                     required />
+                                <div class="invalid-feedback invalid-feedback_name"></div>
                             </div>
                             <div class="d-flex justify-content-end align-items-center mt-3">
-                                @if ($attribute)
-                                    @method('PUT')
-                                    <button type="submit" id="btnUpdate" class="btn btn-primary">Update</button>
-                                @else
-                                    <button type="button" id="btnStore" class="btn btn-primary">Save</button>
-                                @endif
+                                <button type="button" data-action="{{ route('admin.product.attribute.store', $product) }}"
+                                    id="btnStore" class="btn btn-primary">Save</button>
                             </div>
                         </div>
-                    </form>
+                    </div>
                 </div>
                 <div class="card mb-4">
                     <div class="card-header custom border-bottom">
@@ -49,16 +38,20 @@
                                 <ul>
                                     @foreach ($attributes as $attribute)
                                         <li class="mb-3">
-                                            <div class="d-flex justify-content-start align-items-center">
-                                                <span>
+                                            <div class="d-flex justify-content-start align-items-center"
+                                                id="formUpdateAttribute__{{ $attribute->id }}">
+                                                <span class="attribute_name">
                                                     {{ $attribute->name }}
                                                 </span>
-                                                <div class="formUpdateAttributeValue ms-2 d-none"
-                                                    id="formUpdateAttribute__{{ $attribute->id }}">
-                                                    <form action="" role="form" method="POST">
-                                                        <input type="text" class="form-control" id="attribute_name"
-                                                            name="attribute_name" value="{{ $attribute->name }}" required />
-                                                    </form>
+                                                <div class="formUpdateAttributeValue ms-2 d-none">
+                                                    <div class="d-flex justify-content-start align-items-center">
+                                                        <input type="text" class="form-control" name="name"
+                                                            value="{{ $attribute->name }}" required />
+                                                        <button type="button"
+                                                            data-url="{{ route('admin.product.attribute.update_attribute', ['product' => $product, 'attribute' => $attribute]) }}"
+                                                            class="btn btn-primary ms-2 btnUpdateAttribute"
+                                                            data-element="#formUpdateAttribute__{{ $attribute->id }}">Update</button>
+                                                    </div>
                                                 </div>
                                                 <a class="btn btn-light m-0 ms-2 btnAttributeEdit"
                                                     data-element="#formUpdateAttribute__{{ $attribute->id }}"
@@ -78,22 +71,55 @@
                                                         </svg>
                                                     </span>
                                                 </a>
+                                                <a class="btn btn-light m-0 ms-2 btnAttributeValueAdd"
+                                                    data-element="#formAddAttributeValue__{{ $attribute->id }}"
+                                                    data-attribute_id="{{ $attribute->id }}" href="javascript:void(0)">
+                                                    <span class="svg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor" class="bi bi-plus-lg"
+                                                            viewBox="0 0 16 16">
+                                                            <path fill-rule="evenodd"
+                                                                d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z" />
+                                                        </svg>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor" class="bi bi-x-square"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M14 1a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z" />
+                                                            <path
+                                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                        </svg>
+                                                    </span>
+                                                </a>
+                                                <div class="d-flex justify-content-start align-items-center ms-2 d-none"
+                                                    id="formAddAttributeValue__{{ $attribute->id }}">
+                                                    <input type="text" class="form-control" name="attribute_value_name"
+                                                        placeholder="Attribute name" required />
+                                                    <button type="button" class="btn btn-primary ms-2 btnAddAttributeValue"
+                                                        data-url="{{ route('admin.product.attribute_value.store', ['product' => $product, 'attribute' => $attribute]) }}"
+                                                        data-element="#formAddAttributeValue__{{ $attribute->id }}">Add</button>
+                                                </div>
                                             </div>
                                             @if (!$attribute->attributeValue->isEmpty())
                                                 <ul class="mt-1">
                                                     @foreach ($attribute->attributeValue as $itemValue)
-                                                        <li class="mt-2 d-flex justify-content-start align-items-center">
-                                                            <span>
+                                                        <li class="mt-2 d-flex justify-content-start align-items-center"
+                                                            id="formUpdateAttributeValue__{{ $itemValue->id }}">
+                                                            <span class="attribute_value_name">
                                                                 {{ $itemValue->attribute_value }}
                                                             </span>
-                                                            <div class="formUpdateAttributeValue ms-2 d-none"
-                                                                id="formUpdateAttributeValue__{{ $itemValue->id }}">
-                                                                <form action="" role="form" method="POST">
+                                                            <div class="formUpdateAttributeValue ms-2 d-none">
+                                                                <div
+                                                                    class="d-flex justify-content-start align-items-center">
                                                                     <input type="text" class="form-control"
                                                                         id="attribute_name" name="attribute_name"
                                                                         value="{{ $itemValue->attribute_value }}"
                                                                         required />
-                                                                </form>
+                                                                    <button type="button"
+                                                                        data-url="{{ route('admin.product.attribute.update_attribute', ['product' => $product, 'attribute' => $attribute]) }}"
+                                                                        class="btn btn-primary ms-2 btnUpdateAttribute"
+                                                                        data-element="#formUpdateAttribute__{{ $attribute->id }}">Update</button>
+                                                                </div>
                                                             </div>
                                                             <a class="btn btn-light m-0 ms-2 btnAttributeEdit"
                                                                 data-element="#formUpdateAttributeValue__{{ $itemValue->id }}"
@@ -272,32 +298,109 @@
         const view = $('#renderAttributeAdded');
         $('button#btnStore').on('click', async function(e) {
             e.preventDefault();
-            const form = $('#attributeStore');
+            const parent = $('#attributeStore');
+            const input = parent.find('input[name="name"]');
+            const inputFeedback = parent.find('.invalid-feedback_name');
+            const action = $(this).data('action');
+            const formData = new FormData();
+            formData.append('name', input.val());
             const response = await $.ajax({
-                url: form.attr('action'),
-                data: form.serialize(),
+                url: action,
+                data: formData,
                 type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
                 beforeSend: function() {
-
+                    input.removeClass('is-invalid');
+                },
+                success: function(response) {
+                    input.val("");
+                    view.html(response.view);
+                },
+                complete: function() {},
+                error: function(error) {
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function(field, messages) {
+                        input.addClass('is-invalid');
+                        inputFeedback.text(messages);
+                    });
+                }
+            })
+        });
+        $('body').on('click', '.btnAttributeEdit', function(e) {
+            e.preventDefault();
+            const element = $(this).data('element');
+            $(this).toggleClass('open');
+            $(element).find('.formUpdateAttributeValue').toggleClass('d-none');
+        });
+        $('body').on('click', '.btnUpdateAttribute', async function(e) {
+            e.preventDefault();
+            const url = $(this).data('url');
+            const formData = new FormData();
+            const element = $($(this).data('element'));
+            const input = element.find('input[name="name"]');
+            formData.append('name', input.val());
+            formData.append('_method', 'PUT');
+            const response = await $.ajax({
+                url: url,
+                data: formData,
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    input.removeClass('is-invalid');
+                    input.removeClass('is-valid');
+                },
+                success: function(response) {
+                    input.addClass('is-valid');
+                    element.find('.attribute_name').text(input.val());
+                },
+                complete: function() {},
+                error: function(error) {
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function(field, messages) {
+                        input.addClass('is-invalid');
+                    });
+                }
+            });
+        });
+        $('body').on('click', '.btnAttributeValueAdd', function(e) {
+            e.preventDefault();
+            $(this).toggleClass('active');
+            const element = $($(this).data('element'));
+            element.toggleClass('d-none');
+        });
+        $('body').on('click', '.btnAddAttributeValue', async function(e) {
+            e.preventDefault();
+            const element = $($(this).data('element'));
+            const input = element.find('input[name="attribute_value_name"]');
+            const url = $(this).data('url');
+            const formData = new FormData();
+            formData.append('attribute_value', input.val());
+            const response = await $.ajax({
+                url: url,
+                data: formData,
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {
+                    input.removeClass('is-invalid');
+                    input.removeClass('is-valid');
                 },
                 success: function(response) {
                     view.html(response.view);
                 },
-                complete: function() {
-
-                },
-                error: function() {
-
+                complete: function() {},
+                error: function(error) {
+                    let errors = error.responseJSON.errors;
+                    $.each(errors, function(field, messages) {
+                        input.addClass('is-invalid');
+                    });
                 }
-            })
-        });
-    </script>
-    <script>
-        $('.btnAttributeEdit').on('click', function(e) {
-            e.preventDefault();
-            const element = $(this).data('element');
-            $(this).toggleClass('open');
-            $(element).toggleClass('d-none');
+            });
         });
     </script>
 @endsection

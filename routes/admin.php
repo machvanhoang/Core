@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\CustomerController;
 use App\Http\Controllers\Admin\EmailController;
 use App\Http\Controllers\Admin\PaymentMethodController;
+use App\Http\Controllers\Admin\Product\AttributeValueController;
 use App\Http\Controllers\Admin\Product\AttributeController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\UserController;
@@ -51,10 +52,17 @@ Route::prefix('admin')->as('admin.')->group(function () {
                 Route::prefix('{product}')->group(function () {
                     Route::get('{attribute?}', 'index')->name('index');
                     Route::post('store', 'store')->name('store');
-                    Route::put('{attribute}', 'update')->name('update');
+                    Route::put('{attribute}', 'updateAttribute')->name('update_attribute');
                     Route::get('all', 'allAttribute')->name('all');
                     Route::post('save-variant', 'saveVariant')->name('save_variant');
                     Route::post('update-variant', 'updateVariant')->name('update_variant');
+                });
+            });
+            Route::prefix('attribute_value')->as('attribute_value.')->controller(AttributeValueController::class)->group(function () {
+                Route::prefix('{product}')->group(function () {
+                    Route::prefix('{attribute}')->group(function () {
+                        Route::post('store', 'store')->name('store');
+                    });
                 });
             });
         });

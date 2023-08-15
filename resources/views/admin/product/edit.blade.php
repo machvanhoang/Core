@@ -116,7 +116,7 @@
                     </div>
                     <div class="card-body">
                         <div class="row">
-                            <a href="{{ route('admin.product.attribute.product', $product) }}"
+                            <a href="{{ route('admin.product.attribute.index', $product) }}"
                                 class="btn btn-warning mt-1">Setting variants</a>
                         </div>
                     </div>
