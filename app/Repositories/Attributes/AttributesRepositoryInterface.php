@@ -6,5 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface AttributesRepositoryInterface extends RepositoryInterface
 {
-    public function getByType();
+    public function getAttributeByProduct(int $productId);
 }

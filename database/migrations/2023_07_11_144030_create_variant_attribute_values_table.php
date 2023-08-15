@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('color', function (Blueprint $table) {
+        Schema::create('variant_attribute_values', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
+            $table->foreignId('product_variant_id')->constrained('product_variants', 'id');
+            $table->foreignId('attribute_value_id')->constrained('attribute_values', 'id');
             $table->timestamps();
         });
     }
@@ -23,6 +24,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('color');
+        Schema::dropIfExists('variant_attribute_values');
     }
 };

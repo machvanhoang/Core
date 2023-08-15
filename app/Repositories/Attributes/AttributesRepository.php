@@ -14,11 +14,8 @@ class AttributesRepository extends BaseRepository implements AttributesRepositor
     {
         return Attributes::class;
     }
-    /**
-     * @return mixed
-     */
-    public function getByType()
+    public function getAttributeByProduct(int $productId)
     {
-        return $this->model->with(['attributeValue'])->whereType('using')->get();
+        return $this->model->with(['attributeValue'])->whereProductId($productId)->get();
     }
 }

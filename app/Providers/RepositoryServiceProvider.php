@@ -4,6 +4,8 @@ namespace App\Providers;
 
 use App\Repositories\Attributes\AttributesRepository;
 use App\Repositories\Attributes\AttributesRepositoryInterface;
+use App\Repositories\AttributeValue\AttributeValueRepository;
+use App\Repositories\AttributeValue\AttributeValueRepositoryInterface;
 use App\Repositories\Cart\CartRepository;
 use App\Repositories\Cart\CartRepositoryInterface;
 use App\Repositories\CartItems\CartItemsRepository;
@@ -54,6 +56,8 @@ use App\Repositories\Province\ProvinceRepository;
 use App\Repositories\Province\ProvinceRepositoryInterface;
 use App\Repositories\Seo\SeoRepository;
 use App\Repositories\Seo\SeoRepositoryInterface;
+use App\Repositories\VariantAttributeValues\VariantAttributeValuesRepository;
+use App\Repositories\VariantAttributeValues\VariantAttributeValuesRepositoryInterface;
 use App\Repositories\Ward\WardRepository;
 use App\Repositories\Ward\WardRepositoryInterface;
 use Illuminate\Support\ServiceProvider;
@@ -95,6 +99,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(AttributesRepositoryInterface::class, AttributesRepository::class);
         $this->app->singleton(ConfigRepositoryInterface::class, ConfigRepository::class);
         $this->app->singleton(ProductMediaRepositoryInterface::class, ProductMediaRepository::class);
+        $this->app->singleton(AttributeValueRepositoryInterface::class, AttributeValueRepository::class);
+        $this->app->singleton(VariantAttributeValuesRepositoryInterface::class, VariantAttributeValuesRepository::class);
     }
 
     /**

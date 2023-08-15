@@ -2,10 +2,9 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Attributes;
+use App\Models\AttributeValue;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Str;
 
 class AttributeSeeder extends Seeder
 {
@@ -14,39 +13,36 @@ class AttributeSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = [
+        $dataAttribute = [
             [
                 'name' => 'Color',
-                'type' => 'using',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'product_id' => 1,
             ],
             [
                 'name' => 'Size',
-                'type' => 'using',
-                'created_at' => now(),
-                'updated_at' => now(),
+                'product_id' => 1,
             ],
-            [
-                'name' => 'Kilogram',
-                'type' => 'using',
-                'created_at' => now(),
-                'updated_at' => now(),
-            ]
         ];
-        foreach ($data as $key => $item) {
-            $attirbuteId = DB::table('attributes')->insertGetId($item);
-            if ($attirbuteId) {
-                $running = rand(2, 9);
-                for ($i = 0; $i < $running; $i++) {
-                    DB::table('attribute_values')->insert([
-                        'attribute_id' => $attirbuteId,
-                        'attribute_value' => Str::random(8),
-                        'sort' => ($i + 1),
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
-                }
+        $dataAttributeSize = [
+            36,
+            38,
+            40,
+        ];
+        $dataAttributeColor = [
+            'Red',
+            'Blue',
+        ];
+        foreach ($dataAttribute as $key => $item) {
+            $attribute = Attributes::create($item);
+            $data = $dataAttributeSize;
+            if ($attribute->name === 'Color') {
+                $data = $dataAttributeColor;
+            }
+            foreach ($data as $keyAV => $itemAV) {
+                AttributeValue::create([
+                    'attribute_id' => $attribute->id,
+                    'attribute_value' => $itemAV,
+                ]);
             }
         }
     }

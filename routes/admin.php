@@ -1,15 +1,15 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AdminController;
-use App\Http\Controllers\Admin\EmailController;
-use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\Auth\AuthController;
 use App\Http\Controllers\Admin\ConfigController;
 use App\Http\Controllers\Admin\CustomerController;
+use App\Http\Controllers\Admin\EmailController;
+use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\Product\AttributeController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\UserController;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,7 +20,7 @@ use App\Http\Controllers\Admin\UserController;
 | routes are loaded by the RouteServiceProvider and all of them will
 | be assigned to the "web" middleware group. Make something great!
 |
-*/
+ */
 
 Route::prefix('admin')->as('admin.')->group(function () {
     Route::middleware('admin.logged')->group(function () {
@@ -49,8 +49,12 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
             Route::prefix('attribute')->as('attribute.')->controller(AttributeController::class)->group(function () {
                 Route::get('', 'index')->name('index');
-                Route::get('{product}', 'product')->name('product');
-                Route::post('{product}/store', 'storeProduct')->name('store_product');
+                Route::prefix('{product}')->group(function () {
+                    Route::get('', 'product')->name('product');
+                    Route::post('store', 'store')->name('store');
+                    Route::get('all', 'allAttribute')->name('all');
+                    Route::post('save-variant', 'saveVariant')->name('save_variant');
+                });
             });
         });
         Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {
