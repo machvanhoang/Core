@@ -29,7 +29,7 @@ class AttributeValueRequest extends FormRequest
                 'string',
                 'min:1',
                 'max:255',
-            ]
+            ],
         ];
         if ($this->isMethod('POST')) {
             $rules['attribute_value'][] = Rule::unique('attribute_values', 'attribute_value')->where(function ($query) use ($attribute) {
@@ -37,10 +37,11 @@ class AttributeValueRequest extends FormRequest
             });
         }
         if ($this->isMethod('PUT')) {
-            //$attribute = $this->route('attribute');
-            // $rules['name'][] = Rule::unique('attributes', 'name')->ignore($attribute)->where(function ($query) use ($attribute) {
-            //     $query->where('product_id', $attribute->id);
-            // });
+            $attribute = $this->route('attribute');
+            $attributeValue = $this->route("attributeValue");
+            $rules['attribute_value'][] = Rule::unique('attribute_values', 'attribute_value')->ignore($attributeValue)->where(function ($query) use ($attribute) {
+                $query->where('attribute_id', $attribute->id);
+            });
         }
         return $rules;
     }

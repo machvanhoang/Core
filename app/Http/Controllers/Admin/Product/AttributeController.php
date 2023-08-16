@@ -11,7 +11,6 @@ use App\Repositories\Attributes\AttributesRepositoryInterface;
 use App\Repositories\AttributeValue\AttributeValueRepositoryInterface;
 use App\Repositories\ProductVariant\ProductVariantRepositoryInterface;
 use App\Services\ProductService;
-use Illuminate\Http\Request;
 
 class AttributeController extends Controller
 {
@@ -22,14 +21,14 @@ class AttributeController extends Controller
         private ProductVariantRepositoryInterface $productVariantRepository,
     ) {
     }
-    public function index(Product $product, Attributes $attribute = null)
+    public function indexAttribute(Product $product, Attributes $attribute = null)
     {
         $allVariants = $this->productVariantRepository->getVariantByProduct($product->id);
         $attributes = $this->attributesRepository->getAttributeByProduct($product->id);
-        // $combinations = $this->productService->getCombinationsByProduct($product->id);
-        return view('admin.product.attribute.index', compact('product', 'attributes', 'allVariants', 'attribute'));
+        $combinations = $this->productService->getCombinationsByProduct($product->id);
+        return view('admin.product.attribute.index', compact('product', 'attributes', 'allVariants', 'attribute', 'combinations'));
     }
-    public function store(Product $product, AttributeRequest $request)
+    public function storeAttribute(Product $product, AttributeRequest $request)
     {
         $data = $request->validated();
         $this->attributesRepository->create([
@@ -37,10 +36,12 @@ class AttributeController extends Controller
             'product_id' => $product->id,
         ]);
         $attributes = $this->attributesRepository->getAttributeByProduct($product->id);
+        $combinations = $this->productService->getCombinationsByProduct($product->id);
         return response()->json([
             'success' => true,
             'message' => 'Tạo attribute thành công',
             'view' => view('admin.product.attribute.added', compact('attributes', 'product'))->render(),
+            'combinations' => view('admin.product.attribute.variant', compact('combinations', 'product'))->render(),
         ]);
     }
 
@@ -75,15 +76,5 @@ class AttributeController extends Controller
         $data = $request->validated();
         $result = $this->productService->updateProductVariant($product, $data);
         return redirect()->route('admin.product.attribute.index', $product)->with($result);
-    }
-
-    private function byData($attributes)
-    {
-        $combinedPairs = [];
-        foreach ($attributes as $key => $attribute) {
-            $attributeId = $attribute->id;
-            $combinedPairs[$attributeId][] = $attribute;
-        }
-        return $combinedPairs;
     }
 }
