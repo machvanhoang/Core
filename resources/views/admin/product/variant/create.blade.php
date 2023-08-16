@@ -1,4 +1,4 @@
-<form action="{{ route('admin.product.attribute.update_variant', $product) }}" method="POST" role="form">
+<form action="{{ route('admin.product.attribute.save_variant', $product) }}" method="POST" role="form">
     @csrf
     <div class="card-body mt-3">
         <div id="renderViewOptions">

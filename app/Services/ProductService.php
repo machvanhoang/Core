@@ -112,7 +112,10 @@ class ProductService
                             'created_at' => now(),
                             'updated_at' => now(),
                         ];
-                        $this->variantAttributeValuesRepository->create($dataV);
+                        $this->variantAttributeValuesRepository->updateOrCreate([
+                            'product_variant_id' => $productVariant->id,
+                            'attribute_value_id' => $i_ID], $dataV
+                        );
                     }
                 }
             }
@@ -156,13 +159,13 @@ class ProductService
 
     public function updateProductVariant(Product $product, array $data)
     {
-        if (empty($data['product_variant'])) {
-            return [
-                'error' => false,
-                'message' => 'Chỉnh sửa variant cho product bị lỗi.',
-            ];
-        }
         try {
+            if (empty($data['product_variant'])) {
+                return [
+                    'error' => false,
+                    'message' => 'Không có variant nào được chọn',
+                ];
+            }
             foreach ($data['product_variant'] as $key => $item) {
                 $dataUpdate = [
                     'sku' => $item['sku'],
@@ -170,11 +173,10 @@ class ProductService
                     'sale_price' => (int) $item['sale_price'],
                     'inventory' => (int) $item['inventory'],
                 ];
-                $productVariant = $this->productVariantRepository->findOneBy([
+                $this->productVariantRepository->updateOrCreate([
                     'product_id' => $product->id,
                     'id' => $item['id'],
-                ]);
-                $productVariant->update($dataUpdate);
+                ], $dataUpdate);
             }
             return [
                 'success' => true,

@@ -40,7 +40,7 @@ class AttributeValueController extends Controller
             'success' => true,
             'message' => 'Tạo attribute thành công.',
             'view' => view('admin.product.attribute.added', compact('attributes', 'product'))->render(),
-            'combinations' => view('admin.product.attribute.variant', compact('combinations', 'product'))->render(),
+            'combinations' => view('admin.product.variant.create', compact('combinations', 'product'))->render(),
         ]);
     }
 
@@ -49,10 +49,12 @@ class AttributeValueController extends Controller
         $data = $request->validated();
         $attributeValue->attribute_value = $data['attribute_value'];
         $attributeValue->save();
+        $combinations = $this->productService->getCombinationsByProduct($product->id);
         return response()->json([
             'success' => true,
             'message' => 'Update attribute value thành công.',
             'attributes' => $attributeValue,
+            'combinations' => view('admin.product.variant.create', compact('combinations', 'product'))->render(),
         ]);
     }
 }

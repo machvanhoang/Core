@@ -41,7 +41,7 @@ class AttributeController extends Controller
             'success' => true,
             'message' => 'Tạo attribute thành công',
             'view' => view('admin.product.attribute.added', compact('attributes', 'product'))->render(),
-            'combinations' => view('admin.product.attribute.variant', compact('combinations', 'product'))->render(),
+            'combinations' => view('admin.product.variant.create', compact('combinations', 'product'))->render(),
         ]);
     }
 
