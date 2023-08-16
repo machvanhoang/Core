@@ -8,4 +8,13 @@ use Illuminate\Database\Eloquent\Model;
 class Tag extends Model
 {
     use HasFactory;
+    protected $table = 'tags';
+    protected $fillable = [
+        'table',
+        'type',
+        'name',
+        'slug',
+        'description',
+        'media_id',
+    ];
 }

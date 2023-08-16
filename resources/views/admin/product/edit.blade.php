@@ -172,7 +172,7 @@
                         <div class="mt-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <label for="tags" class="form-label font-small">Tags</label>
-                                <a href="#" class="font-small">Cài đặt</a>
+                                <a href="#" class="font-small" id="managementTags">Cài đặt</a>
                             </div>
                             <input type="text" class="form-control @error('tags')is-invalid @enderror" name="tags"
                                 value="" id="tags" placeholder="">
@@ -264,7 +264,52 @@
             </div>
         </div>
     </form>
+    <div class="modal fade" id="modelProductTags" tabindex="-1" style="display: none;" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header border-bottom">
+                    <h5 class="modal-title" id="exampleModalLabel1">Manage tags</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="d-flex justify-content-start">
+                        <input type="text" id="nameBasic" class="form-control"
+                            placeholder="Search to find or create tags">
+                    </div>
+                    <div class="col mt-3">
+                        <div class="">Selected</div>
+                        <div class="form-check form-check-dark">
+                            <input class="form-check-input" type="checkbox" value="" id="customCheckDark"
+                                checked="">
+                            <label class="form-check-label" for="customCheckDark"> Dark </label>
+                        </div>
+                    </div>
+                    <div class="col mt-3">
+                        <div class="">Available</div>
+                        <div class="form-check form-check-dark">
+                            <input class="form-check-input" type="checkbox" value="" id="check1">
+                            <label class="form-check-label" for="check1"> Iphone 14 </label>
+                        </div>
+                        <div class="form-check form-check-dark">
+                            <input class="form-check-input" type="checkbox" value="" id="check2">
+                            <label class="form-check-label" for="check2"> Iphone 10 </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('js')
     <script src="{{ asset('assets/admin/js/product/product.js') }}"></script>
+    <script>
+        $('#managementTags').on('click', function(e) {
+            e.preventDefault();
+            $('#modelProductTags').modal('show');
+        });
+    </script>
 @endsection
