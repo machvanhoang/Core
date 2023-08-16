@@ -9,6 +9,8 @@ use App\Http\Controllers\Admin\PaymentMethodController;
 use App\Http\Controllers\Admin\Product\AttributeController;
 use App\Http\Controllers\Admin\Product\AttributeValueController;
 use App\Http\Controllers\Admin\Product\ProductController;
+use App\Http\Controllers\Admin\Product\ProductTagController;
+use App\Http\Controllers\Admin\TagsController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -66,6 +68,12 @@ Route::prefix('admin')->as('admin.')->group(function () {
                     });
                 });
             });
+        });
+        Route::prefix('tag')->as('tags.')->controller(TagsController::class)->group(function () {
+            Route::post('{product}/store', 'store')->name('store');
+        });
+        Route::prefix('product_tag')->as('product_tag.')->controller(ProductTagController::class)->group(function () {
+            Route::delete('{productTag}', 'delete')->name('delete');
         });
         Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {
             Route::get('', 'index')->name('index');

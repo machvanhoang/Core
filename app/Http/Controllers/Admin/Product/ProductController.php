@@ -16,7 +16,7 @@ class ProductController extends Controller
     public function __construct(
         private ProductRepositoryInterface $productRepository,
         private ProductService $productService,
-        private ProductMediaRepositoryInterface $productMediaRepository
+        private ProductMediaRepositoryInterface $productMediaRepository,
     ) {
     }
     public function index(Request $request)

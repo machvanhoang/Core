@@ -32,6 +32,7 @@ class DatabaseSeeder extends Seeder
         \App\Models\Comment::factory(20)->create();
         $this->call([
             AttributeSeeder::class,
+            TagsSeeder::class,
         ]);
     }
 }

@@ -174,8 +174,34 @@
                                 <label for="tags" class="form-label font-small">Tags</label>
                                 <a href="#" class="font-small" id="managementTags">Cài đặt</a>
                             </div>
-                            <input type="text" class="form-control @error('tags')is-invalid @enderror" name="tags"
-                                value="" id="tags" placeholder="">
+                            <input type="text" class="form-control"
+                                data-url="{{ route('admin.tags.store', $product) }}"
+                                data-table="{{ $product->getTable() }}" data-type="{{ $product->type }}" name="tags"
+                                id="tags" placeholder="">
+                            <div class="invalid-feedback feedback_tag_name"></div>
+                            @if (!$product->productTags->isEmpty())
+                                <div class="listTags">
+                                    @foreach ($product->productTags as $pTag)
+                                        <div class="item-tag">
+                                            <div class="d-flex justify-content-start align-items-center item-tag__content">
+                                                <span>{{ $pTag->tag->name }}</span>
+                                                <button class="btnRemoveTags"
+                                                    data-url="{{ route('admin.product_tag.delete', $pTag) }}"
+                                                    type="button">
+                                                    <span class="svg">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="16"
+                                                            height="16" fill="currentColor" class="bi bi-x"
+                                                            viewBox="0 0 16 16">
+                                                            <path
+                                                                d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z" />
+                                                        </svg>
+                                                    </span>
+                                                </button>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                </div>
+                            @endif
                         </div>
                     </div>
                 </div>
@@ -310,6 +336,84 @@
         $('#managementTags').on('click', function(e) {
             e.preventDefault();
             $('#modelProductTags').modal('show');
+        });
+        $('input#tags').keyup(async function(e) {
+            e.preventDefault();
+            const _this = $(this);
+            if (e.keyCode === 13) {
+                const url = _this.data('url');
+                const table = _this.data('table');
+                const type = _this.data('type');
+                const formData = new FormData();
+                formData.append('name', _this.val());
+                formData.append('table', table);
+                formData.append('type', type);
+                await $.ajax({
+                    url: url,
+                    data: formData,
+                    type: 'POST',
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    beforeSend: function() {},
+                    success: function(response) {
+                        if (response.success) {
+                            const tag = response.tag;
+                            $('.listTags').append(`
+                                <div class="item-tag">
+                                    <div class="d-flex justify-content-start align-items-center item-tag__content">
+                                        <span>${tag.name}</span>
+                                        <button class="btnRemoveTags" data-url="${response.url}" type="button">
+                                            <span class="svg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>`);
+                            _this.val("");
+                            _this.removeClass('is-invalid');
+                            $(`.feedback_tag_${field}`).text("");
+                        }
+                    },
+                    complete: function() {
+                        _this.focus();
+                    },
+                    error: function(error) {
+                        let errors = error.responseJSON.errors;
+                        $.each(errors, function(field, messages) {
+                            _this.addClass('is-invalid');
+                            $(`.feedback_tag_${field}`).text(messages);
+                        });
+                    }
+                });
+            }
+        });
+        $('body').on('click', '.btnRemoveTags', async function(e) {
+            e.preventDefault();
+            const _this = $(this);
+            const url = _this.data('url');
+            const formData = new FormData();
+            formData.append('_method', 'DELETE');
+            await $.ajax({
+                url: url,
+                data: formData,
+                type: 'POST',
+                cache: false,
+                contentType: false,
+                processData: false,
+                beforeSend: function() {},
+                success: function(response) {
+                    if (response.success) {
+                        _this.closest('.item-tag').remove();
+                    }
+                },
+                complete: function() {},
+                error: function(error) {
+                    console.error(error);
+                }
+            });
         });
     </script>
 @endsection

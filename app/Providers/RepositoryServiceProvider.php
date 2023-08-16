@@ -50,12 +50,16 @@ use App\Repositories\ProductFavorite\ProductFavoriteRepositoryInterface;
 use App\Repositories\ProductFavorite\ProductFavoriterRepository;
 use App\Repositories\ProductMedia\ProductMediaRepository;
 use App\Repositories\ProductMedia\ProductMediaRepositoryInterface;
+use App\Repositories\ProductTags\ProductTagsRepository;
+use App\Repositories\ProductTags\ProductTagsRepositoryInterface;
 use App\Repositories\ProductVariant\ProductVariantRepository;
 use App\Repositories\ProductVariant\ProductVariantRepositoryInterface;
 use App\Repositories\Province\ProvinceRepository;
 use App\Repositories\Province\ProvinceRepositoryInterface;
 use App\Repositories\Seo\SeoRepository;
 use App\Repositories\Seo\SeoRepositoryInterface;
+use App\Repositories\Tag\TagRepository;
+use App\Repositories\Tag\TagRepositoryInterface;
 use App\Repositories\VariantAttributeValues\VariantAttributeValuesRepository;
 use App\Repositories\VariantAttributeValues\VariantAttributeValuesRepositoryInterface;
 use App\Repositories\Ward\WardRepository;
@@ -101,6 +105,8 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->singleton(ProductMediaRepositoryInterface::class, ProductMediaRepository::class);
         $this->app->singleton(AttributeValueRepositoryInterface::class, AttributeValueRepository::class);
         $this->app->singleton(VariantAttributeValuesRepositoryInterface::class, VariantAttributeValuesRepository::class);
+        $this->app->singleton(ProductTagsRepositoryInterface::class, ProductTagsRepository::class);
+        $this->app->singleton(TagRepositoryInterface::class, TagRepository::class);
     }
 
     /**

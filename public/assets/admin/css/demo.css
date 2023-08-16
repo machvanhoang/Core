@@ -579,4 +579,44 @@ body {
 
 .form-control {
   font-size: 90%;
+}
+
+.item-tag {
+  display: inline-block;
+}
+.item-tag__content {
+  background: #e3e3e3;
+  border-radius: 0.25rem;
+  min-height: 1.25rem;
+  padding-left: 0.5rem;
+  margin-bottom: 0.3rem;
+  cursor: pointer;
+}
+.item-tag__content span {
+  font-size: 85%;
+}
+.item-tag__content:hover span {
+  color: #000;
+}
+.item-tag__content .btnRemoveTags {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  width: 22px;
+}
+.item-tag__content .btnRemoveTags:focus {
+  outline: none;
+  box-shadow: none;
+}
+.item-tag__content .btnRemoveTags .svg {
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  position: relative;
+  top: -1px;
+}
+
+.listTags {
+  margin-top: 0.5rem;
 }/*# sourceMappingURL=demo.css.map */

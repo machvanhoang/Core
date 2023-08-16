@@ -20,4 +20,8 @@ class Product extends Model
     {
         return $this->belongsTo(User::class);
     }
+    public function productTags()
+    {
+        return $this->hasMany(ProductTags::class, 'product_id', 'id');
+    }
 }
