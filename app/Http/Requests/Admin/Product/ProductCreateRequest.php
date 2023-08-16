@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Product;
 
+use App\Rules\SalePriceLessThanOrEqualRegularPrice;
 use Illuminate\Foundation\Http\FormRequest;
 
 class ProductCreateRequest extends FormRequest
@@ -33,11 +34,6 @@ class ProductCreateRequest extends FormRequest
                 'min:3',
                 'max:255',
             ],
-            'content' => [
-                'nullable',
-                'min:3',
-                'max:10000',
-            ],
             'sku' => [
                 'required',
                 'string',
@@ -55,6 +51,7 @@ class ProductCreateRequest extends FormRequest
                 'numeric',
                 'min:1',
                 'max:1000000000',
+                new SalePriceLessThanOrEqualRegularPrice(),
             ],
             'inventory' => [
                 'required',
@@ -64,11 +61,11 @@ class ProductCreateRequest extends FormRequest
             ],
             'type' => [
                 'required',
-                'string'
+                'string',
             ],
             'status' => [
                 'required',
-                'string'
+                'string',
             ],
             'seo_title' => [
                 'required',

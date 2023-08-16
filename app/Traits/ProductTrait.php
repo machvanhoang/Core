@@ -2,8 +2,15 @@
 
 namespace App\Traits;
 
+use App\Models\Product;
+use App\Repositories\ProductMedia\ProductMediaRepositoryInterface;
 trait ProductTrait
 {
+    public function __construct(
+        private ProductMediaRepositoryInterface $productMediaRepository
+    ) {
+
+    }
     public function getCombinationsByOne(array $arrayAttributes)
     {
         $combinations = [];
@@ -70,5 +77,56 @@ trait ProductTrait
             }
         }
         return $combinations;
+    }
+
+    public function updateOrCreateProductMedia(Product $product, array $data)
+    {
+        try {
+            $allProductMedia = $this->productMediaRepository->getAllMediaByProduct($product->id);
+            if (empty($data['media'])) {
+                // remove all product media
+                if (!$allProductMedia->isEmpty()) {
+                    $this->productMediaRepository->deleteByProduct($product->id);
+                    return true;
+                }
+                return false;
+            }
+            $mediaArray = (array) $data['media'];
+            if ($allProductMedia->isEmpty()) {
+                // insert product media new
+                foreach ($mediaArray as $key => $media) {
+                    $this->productMediaRepository->create([
+                        'product_id' => $product->id,
+                        'media_id' => $media,
+                        'sort' => 1,
+                    ]);
+                }
+                return true;
+            } else {
+                // insert and fillter product media using
+                $arrayInserted = [];
+                foreach ($mediaArray as $key => $media) {
+                    $singleMedia = $this->productMediaRepository->getMediaByProduct($product->id, $media);
+                    if (!$singleMedia) {
+                        $this->productMediaRepository->create([
+                            'product_id' => $product->id,
+                            'media_id' => $media,
+                            'sort' => 1,
+                        ]);
+                    } else {
+                        $arrayInserted[] = $singleMedia->id;
+                    }
+                }
+                // delete product media not using
+                foreach ($allProductMedia as $key => $media) {
+                    if (!in_array($media->id, $arrayInserted)) {
+                        $media->delete();
+                    }
+                }
+                return true;
+            }
+        } catch (\Throwable $th) {
+            return false;
+        }
     }
 }

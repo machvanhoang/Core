@@ -6,7 +6,7 @@
     </div>
 @endsection
 @section('content')
-    <form action="{{ route('admin.product.store') }}" method="POST" role="form">
+    <form action="#" method="POST" role="form" id="formCreateProduct">
         <input type="hidden" name="type" value="{{ $type }}" />
         @csrf
         <div class="row">
@@ -18,40 +18,14 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control @error('name')is-invalid @enderror" name="name"
-                                value="{{ old('name') }}" id="name" placeholder="">
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" class="form-control" name="name" value="{{ old('name') }}"
+                                id="name" placeholder="">
+                            <div class="invalid-feedback feedback_name"></div>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label font-small">Description</label>
-                            <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="description"
-                                cols="30" rows="7">{{ old('description') }}</textarea>
-                            @error('description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
-                        </div>
-                    </div>
-                </div>
-                <div class="card mb-4">
-                    <div class="card-header custom border-bottom">
-                        <h4>Media</h4>
-                    </div>
-                    <div class="card-body">
-                        <div class="mt-3 mb-3">
-                            <label for="image" class="form-label">Choice image</label>
-                            <input type="text" class="form-control @error('name')is-invalid @enderror" name="image"
-                                value="{{ old('image') }}" id="image" placeholder="">
-                            @error('image')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <textarea name="description" class="form-control" id="description" cols="30" rows="7">{{ old('description') }}</textarea>
+                            <div class="invalid-feedback feedback_description"></div>
                         </div>
                     </div>
                 </div>
@@ -63,24 +37,15 @@
                         <div class="row">
                             <div class="col-md-6 mt-3">
                                 <label for="regular_price" class="form-label">Regular price</label>
-                                <input type="text" class="form-control @error('regular_price')is-invalid @enderror"
-                                    name="regular_price" value="{{ old('regular_price') }}" id="regular_price"
-                                    placeholder="">
-                                @error('regular_price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="regular_price"
+                                    value="{{ old('regular_price') }}" id="regular_price" placeholder="">
+                                <div class="invalid-feedback feedback_regular_price"></div>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="sale_price" class="form-label">Sale price</label>
-                                <input type="text" class="form-control @error('sale_price')is-invalid @enderror"
-                                    name="sale_price" value="{{ old('sale_price') }}" id="regular_price" placeholder="">
-                                @error('sale_price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="sale_price" value="{{ old('sale_price') }}"
+                                    id="regular_price" placeholder="">
+                                <div class="invalid-feedback feedback_sale_price"></div>
                             </div>
                         </div>
                     </div>
@@ -93,23 +58,15 @@
                         <div class="row">
                             <div class="col-md-6 mt-3">
                                 <label for="sku" class="form-label">Sku</label>
-                                <input type="text" class="form-control @error('sku')is-invalid @enderror" name="sku"
-                                    value="{{ old('sku') }}" id="sku" placeholder="">
-                                @error('sku')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="sku" value="{{ old('sku') }}"
+                                    id="sku" placeholder="">
+                                <div class="invalid-feedback feedback_sku"></div>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="inventory" class="form-label">Inventory</label>
-                                <input type="text" class="form-control @error('inventory')is-invalid @enderror"
-                                    name="inventory" value="{{ old('inventory') }}" id="inventory" placeholder="">
-                                @error('inventory')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="inventory" value="{{ old('inventory') }}"
+                                    id="inventory" placeholder="">
+                                <div class="invalid-feedback feedback_inventory"></div>
                             </div>
                         </div>
                     </div>
@@ -121,33 +78,20 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <label for="seo_title" class="form-label">Title</label>
-                            <input type="text" class="form-control @error('seo_title')is-invalid @enderror"
-                                name="seo_title" value="{{ old('seo_title') }}" id="seo_title" placeholder="">
-                            @error('seo_title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" class="form-control" name="seo_title" value="{{ old('seo_title') }}"
+                                id="seo_title" placeholder="">
+                            <div class="invalid-feedback feedback_seo_title"></div>
                         </div>
                         <div class="mt-3 mb-3">
                             <label for="seo_keyword" class="form-label">Keyword</label>
-                            <input type="text" class="form-control @error('seo_keyword')is-invalid @enderror"
-                                name="seo_keyword" value="{{ old('seo_keyword') }}" id="keyword" placeholder="">
-                            @error('seo_keyword')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" class="form-control" name="seo_keyword"
+                                value="{{ old('seo_keyword') }}" id="keyword" placeholder="">
+                            <div class="invalid-feedback feedback_seo_keyword"></div>
                         </div>
                         <div class="mb-3">
                             <label for="seo_description" class="form-label font-small">Description</label>
-                            <textarea name="seo_description" class="form-control @error('seo_description')is-invalid @enderror"
-                                id="seo_description" cols="30" rows="7">{{ old('seo_description') }}</textarea>
-                            @error('seo_description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <textarea name="seo_description" class="form-control" id="seo_description" cols="30" rows="7">{{ old('seo_description') }}</textarea>
+                            <div class="invalid-feedback feedback_seo_description"></div>
                         </div>
                     </div>
                 </div>
@@ -159,19 +103,14 @@
                     </div>
                     <div class="card-body">
                         <div class="mt-0">
-                            <select class="form-select @error('status')is-invalid @enderror" name="status"
-                                id="status">
+                            <select class="form-select" name="status" id="status">
                                 <option value="">Choice status</option>
                                 @foreach (STATUS as $status)
                                     <option @selected(old('status') === $status) value="{{ $status }}">{{ $status }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback feedback_status"></div>
                         </div>
                     </div>
                 </div>
@@ -180,11 +119,6 @@
                         <h4>Product organization</h4>
                     </div>
                     <div class="card-body">
-                        <div class="mt-3">
-                            <label for="category" class="form-label font-small">Product category</label>
-                            <input type="text" class="form-control @error('category')is-invalid @enderror"
-                                name="category" value="" id="category" placeholder="">
-                        </div>
                         <div class="mt-3">
                             <label for="type" class="form-label font-small">Product type</label>
                             <input type="text" class="form-control" value="{{ $type }}" id="type"
@@ -195,14 +129,6 @@
                             <input type="text" class="form-control" value="{{ auth(ADMIN)->user()->name }}"
                                 id="user_id" placeholder="" readonly>
                         </div>
-                        <div class="mt-3">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <label for="slug" class="form-label font-small">Tags</label>
-                                <a href="#" class="font-small">Cài đặt</a>
-                            </div>
-                            <input type="text" class="form-control @error('tags')is-invalid @enderror" name="tags"
-                                value="" id="tags" placeholder="">
-                        </div>
                     </div>
                 </div>
             </div>
@@ -210,7 +136,8 @@
                 <div class="card">
                     <div class="card-footer">
                         <div class="d-flex justify-content-start">
-                            <button type="submit" class="btn btn-primary">Create</button>
+                            <button type="button" class="btn btn-primary btnSaveProduct"
+                                data-action="{{ route('admin.product.store') }}">Create</button>
                             <button type="reset" class="btn btn-secondary ms-3">Reset</button>
                         </div>
                     </div>
@@ -218,4 +145,7 @@
             </div>
         </div>
     </form>
+@endsection
+@section('js')
+    <script src="{{ asset('assets/admin/js/product/product.js') }}"></script>
 @endsection

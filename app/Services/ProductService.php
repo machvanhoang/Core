@@ -53,6 +53,7 @@ class ProductService
         try {
             $product->update($data);
             $this->createSeo($product, $data);
+            $this->updateOrCreateProductMedia($product, $data);
             return [
                 'success' => true,
                 'message' => 'Cập nhật sản phẩm thành công.',

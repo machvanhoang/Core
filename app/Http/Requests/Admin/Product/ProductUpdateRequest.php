@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Product;
 
+use App\Rules\SalePriceLessThanOrEqualRegularPrice;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -28,13 +29,13 @@ class ProductUpdateRequest extends FormRequest
                 'required',
                 'min:3',
                 'max:255',
-                Rule::unique('product', 'name')->ignore($product)
+                Rule::unique('product', 'name')->ignore($product),
             ],
             'slug' => [
                 'required',
                 'min:3',
                 'max:255',
-                Rule::unique('product', 'slug')->ignore($product)
+                Rule::unique('product', 'slug')->ignore($product),
             ],
             'description' => [
                 'nullable',
@@ -63,6 +64,7 @@ class ProductUpdateRequest extends FormRequest
                 'numeric',
                 'min:1',
                 'max:1000000000',
+                new SalePriceLessThanOrEqualRegularPrice(),
             ],
             'inventory' => [
                 'required',
@@ -72,7 +74,7 @@ class ProductUpdateRequest extends FormRequest
             ],
             'status' => [
                 'required',
-                'string'
+                'string',
             ],
             'seo_title' => [
                 'required',
@@ -96,7 +98,7 @@ class ProductUpdateRequest extends FormRequest
             'media' => [
                 'nullable',
                 'array',
-                'min:1'
+                'min:1',
             ],
         ];
     }

@@ -35,6 +35,7 @@ $('#file-zone[name="file"]').on('change', function (e) {
                     const media = response.media;
                     element.find('img').attr('src', media.url);
                     element.find('img').attr('alt', media.alt);
+                    $('input[name="media_id"]').val(media.id);
                 }
             },
             complete: function () {

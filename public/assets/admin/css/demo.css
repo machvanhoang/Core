@@ -443,6 +443,12 @@ body {
   display: none;
 }
 
+.bg-gradient-success {
+  background: #0052cc;
+  border-color: #0052cc;
+  color: #Fff;
+}
+
 .appendMutipleFiles {
   display: flex;
   flex-wrap: wrap;

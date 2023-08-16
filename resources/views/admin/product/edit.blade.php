@@ -6,7 +6,7 @@
     </div>
 @endsection
 @section('content')
-    <form action="{{ route('admin.product.update', $product) }}" method="POST" role="form">
+    <form action="#" method="POST" role="form" id="formUpdateProduct">
         @csrf
         @method('PUT')
         <div class="row">
@@ -18,33 +18,19 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input type="text" class="form-control @error('name')is-invalid @enderror" name="name"
+                            <input type="text" class="form-control" name="name"
                                 value="{{ old('name') ?? $product->name }}" id="name" placeholder="">
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback feedback_name"></div>
                         </div>
                         <div class="mb-3">
                             <label for="description" class="form-label font-small">Description</label>
-                            <textarea name="description" class="form-control @error('description')is-invalid @enderror" id="description"
-                                cols="30" rows="7">{{ old('description') ?? $product->description }}</textarea>
-                            @error('name')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <textarea name="description" class="form-control" id="description" cols="30" rows="7">{{ old('description') ?? $product->description }}</textarea>
+                            <div class="invalid-feedback feedback_description"></div>
                         </div>
                         <div class="mb-3">
                             <label for="content" class="form-label font-small">Content</label>
-                            <textarea name="content" class="form-control @error('content')is-invalid @enderror" id="content" cols="30"
-                                rows="12">{{ $product->content }}</textarea>
-                            @error('content')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <textarea name="content" class="form-control" id="content" cols="30" rows="12">{{ $product->content }}</textarea>
+                            <div class="invalid-feedback feedback_content"></div>
                         </div>
                     </div>
                 </div>
@@ -57,25 +43,17 @@
                         <div class="row">
                             <div class="col-md-6 mt-3">
                                 <label for="regular_price" class="form-label">Regular price</label>
-                                <input type="text" class="form-control @error('regular_price')is-invalid @enderror"
-                                    name="regular_price" value="{{ old('regular_price') ?? $product->regular_price }}"
-                                    id="regular_price" placeholder="">
-                                @error('regular_price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="regular_price"
+                                    value="{{ old('regular_price') ?? $product->regular_price }}" id="regular_price"
+                                    placeholder="">
+                                <div class="invalid-feedback feedback_regular_price"></div>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="sale_price" class="form-label">Sale price</label>
-                                <input type="text" class="form-control @error('sale_price')is-invalid @enderror"
-                                    name="sale_price" value="{{ old('sale_price') ?? $product->sale_price }}"
-                                    id="regular_price" placeholder="">
-                                @error('sale_price')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="sale_price"
+                                    value="{{ old('sale_price') ?? $product->sale_price }}" id="regular_price"
+                                    placeholder="">
+                                <div class="invalid-feedback feedback_sale_price"></div>
                             </div>
                         </div>
                     </div>
@@ -88,24 +66,15 @@
                         <div class="row">
                             <div class="col-md-6 mt-3">
                                 <label for="sku" class="form-label">Sku</label>
-                                <input type="text" class="form-control @error('sku')is-invalid @enderror" name="sku"
+                                <input type="text" class="form-control" name="sku"
                                     value="{{ old('sku') ?? $product->sku }}" id="sku" placeholder="">
-                                @error('sku')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <div class="invalid-feedback feedback_sku"></div>
                             </div>
                             <div class="col-md-6 mt-3">
                                 <label for="inventory" class="form-label">Inventory</label>
-                                <input type="text" class="form-control @error('inventory')is-invalid @enderror"
-                                    name="inventory" value="{{ old('inventory') ?? $product->inventory }}" id="inventory"
-                                    placeholder="">
-                                @error('inventory')
-                                    <div class="invalid-feedback">
-                                        {{ $message }}
-                                    </div>
-                                @enderror
+                                <input type="text" class="form-control" name="inventory"
+                                    value="{{ old('inventory') ?? $product->inventory }}" id="inventory" placeholder="">
+                                <div class="invalid-feedback feedback_inventory"></div>
                             </div>
                         </div>
                     </div>
@@ -114,10 +83,12 @@
                     <div class="card-header custom border-bottom">
                         <h4>Variants</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="card-body mt-3">
                         <div class="row">
-                            <a href="{{ route('admin.product.attribute.index', $product) }}"
-                                class="btn btn-warning mt-1">Setting variants</a>
+                            <div class="col-md-12">
+                                <a href="{{ route('admin.product.attribute.index', $product) }}"
+                                    class="btn btn-warning mt-1">Setting variants</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -128,34 +99,20 @@
                     <div class="card-body">
                         <div class="mt-3 mb-3">
                             <label for="seo_title" class="form-label">Title</label>
-                            <input type="text" class="form-control @error('seo_title')is-invalid @enderror"
-                                name="seo_title" value="{{ $product->seo()?->title }}" id="seo_title" placeholder="">
-                            @error('seo_title')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" class="form-control" name="seo_title"
+                                value="{{ $product->seo()?->title }}" id="seo_title" placeholder="">
+                            <div class="invalid-feedback feedback_seo_title"></div>
                         </div>
                         <div class="mt-3 mb-3">
                             <label for="seo_keyword" class="form-label">Keyword</label>
-                            <input type="text" class="form-control @error('seo_keyword')is-invalid @enderror"
-                                name="seo_keyword" value="{{ $product->seo()?->keyword }}" id="seo_keyword"
-                                placeholder="">
-                            @error('seo_keyword')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <input type="text" class="form-control" name="seo_keyword"
+                                value="{{ $product->seo()?->keyword }}" id="seo_keyword" placeholder="">
+                            <div class="invalid-feedback feedback_seo_keyword"></div>
                         </div>
                         <div class="mb-3">
                             <label for="seo_description" class="form-label font-small">Description</label>
-                            <textarea name="seo_description" class="form-control @error('seo_description')is-invalid @enderror"
-                                id="seo_description" cols="30" rows="7">{{ $product->seo()?->description }}</textarea>
-                            @error('seo_description')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <textarea name="seo_description" class="form-control" id="seo_description" cols="30" rows="7">{{ $product->seo()?->description }}</textarea>
+                            <div class="invalid-feedback feedback_seo_description"></div>
                         </div>
 
                     </div>
@@ -168,19 +125,14 @@
                     </div>
                     <div class="card-body">
                         <div class="mt-0">
-                            <select class="form-select @error('status')is-invalid @enderror" name="status"
-                                id="status">
+                            <select class="form-select" name="status" id="status">
                                 <option value="">Choice status</option>
                                 @foreach (STATUS as $status)
                                     <option @selected(old('status') === $status || $product->status === $status) value="{{ $status }}">{{ $status }}
                                     </option>
                                 @endforeach
                             </select>
-                            @error('status')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback feedback_status"></div>
                         </div>
                     </div>
                 </div>
@@ -190,13 +142,9 @@
                     </div>
                     <div class="card-body">
                         <div class="mt-0">
-                            <input type="text" class="form-control @error('slug')is-invalid @enderror" name="slug"
+                            <input type="text" class="form-control" name="slug"
                                 value="{{ old('slug') ?? $product->slug }}" id="slug" placeholder="">
-                            @error('slug')
-                                <div class="invalid-feedback">
-                                    {{ $message }}
-                                </div>
-                            @enderror
+                            <div class="invalid-feedback feedback_slug"></div>
                         </div>
                     </div>
                 </div>
@@ -307,7 +255,8 @@
                 <div class="card">
                     <div class="card-footer">
                         <div class="d-flex justify-content-start">
-                            <button type="submit" class="btn btn-primary">Update</button>
+                            <button type="button" class="btn btn-primary btnUpdateProduct"
+                                data-action="{{ route('admin.product.update', $product) }}">Update</button>
                             <button type="reset" class="btn btn-secondary ms-3">Reset</button>
                         </div>
                     </div>
@@ -315,4 +264,7 @@
             </div>
         </div>
     </form>
+@endsection
+@section('js')
+    <script src="{{ asset('assets/admin/js/product/product.js') }}"></script>
 @endsection
