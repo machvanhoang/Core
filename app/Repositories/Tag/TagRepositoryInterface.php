@@ -6,4 +6,5 @@ use App\Repositories\RepositoryInterface;
 
 interface TagRepositoryInterface extends RepositoryInterface
 {
+    public function getByType(string $table, string $type);
 }

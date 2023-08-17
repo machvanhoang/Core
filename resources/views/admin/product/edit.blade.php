@@ -172,7 +172,8 @@
                         <div class="mt-3">
                             <div class="d-flex justify-content-between align-items-center">
                                 <label for="tags" class="form-label font-small">Tags</label>
-                                <a href="#" class="font-small" id="managementTags">Cài đặt</a>
+                                <a href="#" class="font-small" id="managementTags"
+                                    data-url="{{ route('admin.tags.all_product', $product) }}">Cài đặt</a>
                             </div>
                             <input type="text" class="form-control"
                                 data-url="{{ route('admin.tags.store', $product) }}"
@@ -303,22 +304,8 @@
                             placeholder="Search to find or create tags">
                     </div>
                     <div class="col mt-3">
-                        <div class="">Selected</div>
-                        <div class="form-check form-check-dark">
-                            <input class="form-check-input" type="checkbox" value="" id="customCheckDark"
-                                checked="">
-                            <label class="form-check-label" for="customCheckDark"> Dark </label>
-                        </div>
-                    </div>
-                    <div class="col mt-3">
                         <div class="">Available</div>
-                        <div class="form-check form-check-dark">
-                            <input class="form-check-input" type="checkbox" value="" id="check1">
-                            <label class="form-check-label" for="check1"> Iphone 14 </label>
-                        </div>
-                        <div class="form-check form-check-dark">
-                            <input class="form-check-input" type="checkbox" value="" id="check2">
-                            <label class="form-check-label" for="check2"> Iphone 10 </label>
+                        <div class="renderTagsProduct row">
                         </div>
                     </div>
                 </div>
@@ -333,8 +320,37 @@
 @section('js')
     <script src="{{ asset('assets/admin/js/product/product.js') }}"></script>
     <script>
-        $('#managementTags').on('click', function(e) {
+        $('#managementTags').on('click', async function(e) {
             e.preventDefault();
+            const url = $(this).data('url');
+            await $.ajax({
+                url: url,
+                type: "GET",
+                beforeSend: function() {},
+                success: function(response) {
+                    console.log(response);
+                    if (response.success) {
+                        const tags = response.tags;
+                        let html = "";
+                        tags.forEach((element, index) => {
+                            console.log(index, element);
+                            html += `<div class="col-md-4">
+                                        <div class="form-check form-check-dark">
+                                            <input class="form-check-input" type="checkbox" value="${element.id}" id="tagProduct__${element.id}">
+                                            <label class="form-check-label" for="tagProduct__${element.id}">${element.name}</label>
+                                        </div>
+                                    </div>`;
+                        });
+                        $('.renderTagsProduct').html(html);
+                    }
+                },
+                complete: function() {
+
+                },
+                error: function(error) {
+
+                }
+            })
             $('#modelProductTags').modal('show');
         });
         $('input#tags').keyup(async function(e) {
@@ -374,7 +390,7 @@
                                 </div>`);
                             _this.val("");
                             _this.removeClass('is-invalid');
-                            $(`.feedback_tag_${field}`).text("");
+                            $(`.feedback_tag_name`).text("");
                         }
                     },
                     complete: function() {

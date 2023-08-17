@@ -70,6 +70,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             });
         });
         Route::prefix('tag')->as('tags.')->controller(TagsController::class)->group(function () {
+            Route::get('{product}/all-product', 'allProduct')->name('all_product');
             Route::post('{product}/store', 'store')->name('store');
         });
         Route::prefix('product_tag')->as('product_tag.')->controller(ProductTagController::class)->group(function () {

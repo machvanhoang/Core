@@ -4,10 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\TagRequest;
+use App\Models\Product;
 use App\Repositories\ProductTags\ProductTagsRepositoryInterface;
 use App\Repositories\Tag\TagRepositoryInterface;
-use Illuminate\Http\Request;
-use App\Models\Product;
 
 class TagsController extends Controller
 {
@@ -15,6 +14,15 @@ class TagsController extends Controller
         private TagRepositoryInterface $tagRepository,
         private ProductTagsRepositoryInterface $productTagsRepository
     ) {
+    }
+    public function allProduct(Product $product)
+    {
+        $tags = $this->tagRepository->getByType($product->getTable(), $product->type);
+        return response()->json([
+            'success' => true,
+            'message' => 'Get all tag with product ID=' . $product->id,
+            'tags' => $tags,
+        ]);
     }
     public function store(Product $product, TagRequest $request)
     {
@@ -29,7 +37,7 @@ class TagsController extends Controller
         }
         $productTag = $this->productTagsRepository->create([
             'tag_id' => $tag->id,
-            'product_id' => $product->id
+            'product_id' => $product->id,
         ]);
         return response()->json([
             'success' => true,

@@ -5,17 +5,17 @@ namespace App\Http\Controllers\Admin\Product;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductTags;
-use App\Models\Tag;
 use App\Repositories\ProductTags\ProductTagsRepositoryInterface;
 
 class ProductTagController extends Controller
 {
     public function __construct(
-        private ProductTagsRepositoryInterface $productTagsRepository
+        private ProductTagsRepositoryInterface $productTagsRepository,
     ) {
     }
     public function all(Product $product)
     {
+
     }
     public function delete(ProductTags $productTag)
     {
