@@ -18,10 +18,12 @@ class TagsController extends Controller
     public function allProduct(Product $product)
     {
         $tags = $this->tagRepository->getByType($product->getTable(), $product->type);
+        $productTags = $this->productTagsRepository->getByProduct($product->id);
         return response()->json([
             'success' => true,
             'message' => 'Get all tag with product ID=' . $product->id,
             'tags' => $tags,
+            'productTags' => $productTags,
         ]);
     }
     public function store(Product $product, TagRequest $request)

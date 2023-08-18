@@ -74,6 +74,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::post('{product}/store', 'store')->name('store');
         });
         Route::prefix('product_tag')->as('product_tag.')->controller(ProductTagController::class)->group(function () {
+            Route::put('{product}/update', 'update')->name('update');
             Route::delete('{productTag}', 'delete')->name('delete');
         });
         Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {

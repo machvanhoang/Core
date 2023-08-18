@@ -298,20 +298,25 @@
                     <h5 class="modal-title" id="exampleModalLabel1">Manage tags</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <div class="d-flex justify-content-start">
-                        <input type="text" id="nameBasic" class="form-control"
-                            placeholder="Search to find or create tags">
-                    </div>
-                    <div class="col mt-3">
-                        <div class="">Available</div>
-                        <div class="renderTagsProduct row">
+                <form action="{{ route('admin.product_tag.update', $product) }}" method="POST" role="form"
+                    id="formProductTagsUpdate">
+                    @csrf
+                    @method('PUT')
+                    <div class="modal-body">
+                        <div class="d-flex justify-content-start">
+                            <input type="text" id="nameBasic" class="form-control"
+                                placeholder="Search to find or create tags">
+                        </div>
+                        <div class="col mt-3">
+                            <div class="">Available</div>
+                            <div class="renderTagsProduct row">
+                            </div>
                         </div>
                     </div>
-                </div>
+                </form>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-label-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
+                    <button type="button" class="btn btn-primary btnUpdateTags">Update changes</button>
                 </div>
             </div>
         </div>
@@ -331,13 +336,22 @@
                     console.log(response);
                     if (response.success) {
                         const tags = response.tags;
+                        const productTags = response.productTags;
                         let html = "";
                         tags.forEach((element, index) => {
-                            console.log(index, element);
+                            let checked = "";
+                            if (productTags.length) {
+                                productTags.forEach((element1, index1) => {
+                                    if (element.id === element1.tag_id) {
+                                        checked = 'checked';
+                                        return true;
+                                    }
+                                });
+                            }
                             html += `<div class="col-md-4">
                                         <div class="form-check form-check-dark">
-                                            <input class="form-check-input" type="checkbox" value="${element.id}" id="tagProduct__${element.id}">
-                                            <label class="form-check-label" for="tagProduct__${element.id}">${element.name}</label>
+                                            <input class="form-check-input" name="tagIds[]" ${checked} type="checkbox" value="${element.id}" id="tagProduct__${element.id}">
+                                            <label class="form-check-label"   for="tagProduct__${element.id}">${element.name}</label>
                                         </div>
                                     </div>`;
                         });
@@ -424,6 +438,25 @@
                     if (response.success) {
                         _this.closest('.item-tag').remove();
                     }
+                },
+                complete: function() {},
+                error: function(error) {
+                    console.error(error);
+                }
+            });
+        });
+        $('body').on('click', '.btnUpdateTags', async function(e) {
+            e.preventDefault();
+            const _this = $(this);
+            const form = $('form#formProductTagsUpdate');
+            await $.ajax({
+                url: form.attr('action'),
+                type: 'POST',
+                dataType: "json",
+                data: form.serialize(),
+                beforeSend: function() {},
+                success: function(response) {
+                    console.log("res update", response);
                 },
                 complete: function() {},
                 error: function(error) {
