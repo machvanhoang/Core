@@ -129,6 +129,12 @@
         </li>
         <li class="menu-header small text-uppercase"><span class="menu-header-text">General</span></li>
         <li class="menu-item">
+            <a href="{{ route('admin.import.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-import"></i>
+                <div data-i18n="Configs">Import</div>
+            </a>
+        </li>
+        <li class="menu-item">
             <a href="{{ route('admin.config.index') }}" class="menu-link">
                 <i class="menu-icon tf-icons bx bx-cog"></i>
                 <div data-i18n="Configs">Configs</div>

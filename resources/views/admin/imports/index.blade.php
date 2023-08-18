@@ -13,15 +13,21 @@
     <div class="row mb-4">
         <div class="col-md-12">
             <div class="card">
-                <h5 class="card-header">List of Customer</h5>
+                <h5 class="card-header">List of Provinces</h5>
                 <div class="table-responsive text-nowrap p-3">
-                    <table class="table" id="customers_table">
+                    <form class="d-flex justify-content-end pb-3" action="{{ route('admin.import.upload') }}" enctype="multipart/form-data" method="POST">
+                        @csrf
+                        <input type="file" name="file_upload" class="form-control w-25">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                    <table class="table" id="provinces_table">
                         <thead class="table-light">
                             <tr>
                                 <th>#ID</th>
                                 <th>Name</th>
-                                <th>Email</th>
-                                <th>Phone</th>
+                                <th>Slug</th>
+                                <th>Code</th>
+                                <th>Status</th>
                                 <th>Created at</th>
                                 <th>Action</th>
                             </tr>
@@ -43,9 +49,10 @@
         });
 
         function loadDatatable() {
-            $('#customers_table').DataTable({
+            $('#provinces_table').DataTable({
                 ajax: {
-                    url: "{{ route('admin.customer.datatables') }}",
+                    url: "{{ route('admin.import.datatables') }}",
+                    // 162778
                     type: "GET"
                 },
                 columns: [
@@ -53,13 +60,16 @@
                         data: 'id'
                     },
                     {
-                        data: 'full_name'
+                        data: 'name'
                     },
                     {
-                        data: 'email'
+                        data: 'slug'
                     },
                     {
-                        data: 'phone'
+                        data: 'code'
+                    },
+                    {
+                        data: 'status'
                     },
                     {
                         data: 'created_at'

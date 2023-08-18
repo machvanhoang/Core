@@ -11,6 +11,7 @@ use App\Http\Controllers\Admin\Product\AttributeValueController;
 use App\Http\Controllers\Admin\Product\ProductController;
 use App\Http\Controllers\Admin\Product\ProductTagController;
 use App\Http\Controllers\Admin\TagsController;
+use App\Http\Controllers\Admin\TestController;
 use App\Http\Controllers\Admin\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,8 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::get('', 'index')->name('index');
         });
         Route::prefix('customer')->as('customer.')->controller(CustomerController::class)->group(function () {
+            // datatables.
+            Route::get('datatables', 'datatables')->name('datatables');
             Route::get('', 'index')->name('index');
             Route::get('create', 'create')->name('create');
             Route::post('store', 'store')->name('store');
@@ -74,6 +77,11 @@ Route::prefix('admin')->as('admin.')->group(function () {
         });
         Route::prefix('product_tag')->as('product_tag.')->controller(ProductTagController::class)->group(function () {
             Route::delete('{productTag}', 'delete')->name('delete');
+        });
+        Route::prefix('import')->name('import.')->controller(TestController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('file-upload', 'upload')->name('upload');
+            Route::get('datatables', 'datatables')->name('datatables');
         });
         Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {
             Route::get('', 'index')->name('index');

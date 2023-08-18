@@ -8,7 +8,7 @@
             , made with ❤️ by
             <a href="https://www.facebook.com/haweb.vn" target="_blank" class="footer-link fw-bolder">Hoang Mach
                 Website</a>
-            from <a href="https://www.haweb.vn" target="_blank" class="footer-link fw-bolder">www.haweb.vn</a>
+            from <a href="https://demos.themeselection.com/sneat-bootstrap-html-admin-template-free/html/" target="_blank" class="footer-link fw-bolder">them sneat</a>
         </div>
     </div>
 </footer>

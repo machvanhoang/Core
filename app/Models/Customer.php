@@ -11,7 +11,19 @@ class Customer extends Model
 {
     use HasApiTokens, HasFactory, Notifiable;
     protected $table = 'customer';
-    protected $fillable = ['customer_status_id', 'full_name', 'phone', 'email', 'address', 'media_id', 'username', 'verify_code', 'password', 'remember_token'];
+    protected $fillable = [
+        'customer_status_id',
+        'full_name',
+        'phone',
+        'email',
+        'address',
+        'media_id',
+        'username',
+        'verify_code',
+        'password',
+        'remember_token',
+        'created_at'
+    ];
     /**
      * The attributes that should be hidden for serialization.
      *
@@ -29,8 +41,13 @@ class Customer extends Model
      */
     protected $casts = [
         'email_verified_at' => 'datetime',
-        'password' => 'hashed',
+        'password'          => 'hashed',
     ];
+
+    public function getCreatedAtAttribute($date)
+    {
+        return \Carbon\Carbon::parse($date)->format('Y-m-d H:i:s');
+    }
 
     public function status()
     {

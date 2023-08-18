@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use Database\Factories\CustomerFactory;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -24,7 +25,7 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
         ]);
         \App\Models\Counpon::factory(20)->create();
-        \App\Models\Customer::factory(20)->create();
+        \App\Models\Customer::factory(200)->create();
         \App\Models\Product::factory(20)->create();
         \App\Models\ProductVariant::factory(20)->create();
         \App\Models\ProductFavorite::factory(20)->create();
