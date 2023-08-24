@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers\Admin\Product;
 
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\ProductTags;
 use App\Repositories\ProductTags\ProductTagsRepositoryInterface;
-use Illuminate\Http\Request;
 
 class ProductTagController extends Controller
 {
@@ -16,18 +16,20 @@ class ProductTagController extends Controller
     }
     public function all(Product $product)
     {
-
     }
     public function update(Product $product, Request $request)
     {
         $tagsIds = $request->tagIds;
+        $allTags = $this->productTagsRepository->getByProduct($product->id);
         if (empty($tagsIds)) {
+            foreach ($allTags as $key => $tag) {
+                $tag->delete();
+            }
             return response()->json([
-                'success' => false,
-                'message' => 'Không thể thực hiện',
+                'success' => true,
+                'message' => 'Successs',
             ]);
         }
-        $allTags = $this->productTagsRepository->getByProduct($product->id);
         foreach ($tagsIds as $key => $tag) {
             $productTag = $this->productTagsRepository->findOneBy([
                 'product_id' => $product->id,
@@ -41,10 +43,15 @@ class ProductTagController extends Controller
             }
         }
         $allTags = $this->productTagsRepository->getByProduct($product->id);
-        $this->productTagsRepository->deleteProductTags($product->id, $tagsIds);
+        foreach ($allTags as $key => $tag) {
+            if (!in_array($tag->tag_id, $tagsIds)) {
+                $tag->delete();
+            }
+        }
+        $allTags = $this->productTagsRepository->getByProduct($product->id);
         return response()->json([
             'success' => true,
-            'message' => 'Thành công',
+            'message' => 'Successs',
             'tagsIds' => $tagsIds,
             'allTags' => $allTags,
         ]);

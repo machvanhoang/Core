@@ -16,7 +16,7 @@ class ProductTagsRepository extends BaseRepository implements ProductTagsReposit
     }
     public function getByProduct(int $productId)
     {
-        return $this->model->select('tag_id')->where('product_id', $productId)->get();
+        return $this->model->where('product_id', $productId)->get();
     }
     public function deleteProductTags(int $productId, array $tagsIds = [])
     {

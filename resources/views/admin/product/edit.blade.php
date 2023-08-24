@@ -180,8 +180,8 @@
                                 data-table="{{ $product->getTable() }}" data-type="{{ $product->type }}" name="tags"
                                 id="tags" placeholder="">
                             <div class="invalid-feedback feedback_tag_name"></div>
-                            @if (!$product->productTags->isEmpty())
-                                <div class="listTags">
+                            <div class="listTags">
+                                @if (!$product->productTags->isEmpty())
                                     @foreach ($product->productTags as $pTag)
                                         <div class="item-tag">
                                             <div class="d-flex justify-content-start align-items-center item-tag__content">
@@ -201,8 +201,8 @@
                                             </div>
                                         </div>
                                     @endforeach
-                                </div>
-                            @endif
+                                @endif
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -333,7 +333,6 @@
                 type: "GET",
                 beforeSend: function() {},
                 success: function(response) {
-                    console.log(response);
                     if (response.success) {
                         const tags = response.tags;
                         const productTags = response.productTags;
@@ -456,7 +455,27 @@
                 data: form.serialize(),
                 beforeSend: function() {},
                 success: function(response) {
-                    console.log("res update", response);
+                    if (response.success) {
+                        const allTags = response.allTags;
+                        $('.listTags').html("");
+                        if (allTags.length) {
+                            allTags.forEach((tag, index) => {
+                                $('.listTags').append(`
+                                <div class="item-tag">
+                                    <div class="d-flex justify-content-start align-items-center item-tag__content">
+                                        <span>${tag.tag_id}</span>
+                                        <button class="btnRemoveTags" data-url="${tag.tag_id}" type="button">
+                                            <span class="svg">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                                    <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"></path>
+                                                </svg>
+                                            </span>
+                                        </button>
+                                    </div>
+                                </div>`);
+                            });
+                        }
+                    }
                 },
                 complete: function() {},
                 error: function(error) {
