@@ -14,27 +14,61 @@
         <div class="col-md-12">
             <div class="card">
                 <h5 class="card-header">List of Provinces</h5>
-                <div class="table-responsive text-nowrap p-3">
-                    <form class="d-flex justify-content-end pb-3" action="{{ route('admin.import.upload') }}" enctype="multipart/form-data" method="POST">
-                        @csrf
-                        <input type="file" name="file_upload" class="form-control w-25">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </form>
-                    <table class="table" id="provinces_table">
-                        <thead class="table-light">
-                            <tr>
-                                <th>#ID</th>
-                                <th>Name</th>
-                                <th>Slug</th>
-                                <th>Code</th>
-                                <th>Status</th>
-                                <th>Created at</th>
-                                <th>Action</th>
-                            </tr>
-                        </thead>
-                        <tbody class="table-border-bottom-0"></tbody>
-                    </table>
+                <div class="card-body">
+                    <div class="table-responsive text-nowrap p-3">
+                        <div class="d-flex">
+
+                            <form class="d-flex justify-content-start pb-3" action="{{ route('admin.import.upload') }}"
+                                enctype="multipart/form-data" method="POST">
+                                @csrf
+                                <input type="file" name="file_upload" class="form-control me-3">
+                                <button type="submit" class="btn btn-primary">Submit</button>
+                            </form>
+                            <button type="button" class="btn btn-primary ms-3" data-bs-toggle="modal"
+                                data-bs-target="#exportModal">
+                                Export
+                            </button>
+                        </div>
+                        <table class="table table-hover" id="provinces_table">
+                            <thead class="table-light">
+                                <tr>
+                                    <th>#ID</th>
+                                    <th>Name</th>
+                                    <th>Slug</th>
+                                    <th>Code</th>
+                                    <th>Status</th>
+                                    <th>Created at</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody class="table-border-bottom-0"></tbody>
+                        </table>
+                    </div>
                 </div>
+            </div>
+        </div>
+    </div>
+    {{-- modals --}}
+    <div class="modal fade" id="exportModal" tabindex="-1" aria-modal="true" role="dialog">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <form action="{{ route('admin.export.index') }}" method="POST">
+                    @csrf
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel1">Enter your email</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div>
+                            <input type="text" class="form-control" name="email">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-outline-secondary"
+                            data-bs-dismiss="modal">Close</button>
+                        <button type="submit" id="btnExport" class="btn btn-primary">OK</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
@@ -55,8 +89,7 @@
                     // 162778
                     type: "GET"
                 },
-                columns: [
-                    {
+                columns: [{
                         data: 'id'
                     },
                     {
@@ -77,14 +110,16 @@
                     {
                         data: 'id',
                         className: 'text-center',
-                        render: function (data, type, row, meta) {
+                        render: function(data, type, row, meta) {
                             return `<a href="#${data}">Edit</a>`;
                         }
                     }
                 ],
                 processing: true,
                 serverSide: true,
-                order: [[0, 'DESC']]
+                order: [
+                    [0, 'DESC']
+                ]
             });
         }
     </script>

@@ -9,7 +9,8 @@
 </head>
 
 <body>
-    <p>Content Notifications</p>
+    <p>Bạn vừa export thành công. Đây là đường dẫn để tải file</p>
+    <a href="{{ $file_path }}" download="">Tải xuống ở đây</a>
 </body>
 
 </html>

@@ -83,6 +83,9 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::post('file-upload', 'upload')->name('upload');
             Route::get('datatables', 'datatables')->name('datatables');
         });
+        Route::prefix('export')->name('export.')->controller(TestController::class)->group(function () {
+            Route::post('/', 'export')->name('index');
+        });
         Route::prefix('config')->as('config.')->controller(ConfigController::class)->group(function () {
             Route::get('', 'index')->name('index');
             Route::put('{config}', 'update')->name('update');
