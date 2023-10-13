@@ -2,14 +2,16 @@
 
 namespace App\Jobs;
 
+use App\Mail\ImportEmail;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Mail;
 
-class Import implements ShouldQueue
+class ImportCompleted implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -18,7 +20,7 @@ class Import implements ShouldQueue
      */
     public function __construct()
     {
-        //
+        // $this->data = $data;
     }
 
     /**
@@ -26,6 +28,6 @@ class Import implements ShouldQueue
      */
     public function handle(): void
     {
-        //
+        Mail::to('dinhcongthong97y@gmail.com')->send(new ImportEmail());
     }
 }

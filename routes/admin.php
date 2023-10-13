@@ -82,6 +82,7 @@ Route::prefix('admin')->as('admin.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('file-upload', 'upload')->name('upload');
             Route::get('datatables', 'datatables')->name('datatables');
+            Route::get('thong', 'thongTest')->name('thong_test');
         });
         Route::prefix('export')->name('export.')->controller(TestController::class)->group(function () {
             Route::post('/', 'export')->name('index');
